@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>timothymonteath.space</title>
+<link>http://timothymonteath.space/blog.html</link>
+<atom:link href="http://timothymonteath.space/blog.xml" rel="self" type="application/rss+xml"/>
+<description>This is Dr Timothy Monteath&#39;s personal website.</description>
+<generator>quarto-1.8.27</generator>
+<lastBuildDate>Sat, 22 Nov 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Line spacing in Emacs by making a new font</title>
+  <link>http://timothymonteath.space/posts/blog_posts/Emacs_font_spacing.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Emacs does not have a native way in which to increase the line spacing across all documents. As someone that works a lot on large text documents in Emacs I find that text is sometimes just too close together, and having a bit of line spacing makes it much easier to work with long pages of text.</p>
+<p>To get around the lack of line-spacing support I have created a hacky way to create a new font which includes extra white space above and below the text itself to create the impression of line spacing.</p>
+<p>This code is taken/derived from: https://github.com/tam5/font-patcher</p>
+<p>Fontforge needs to be installed from the website. via brew</p>
+<p>then you can run this fontforge file.py</p>
+<div id="67c8ef9f" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> os</span>
+<span id="cb1-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> fontforge</span>
+<span id="cb1-3"></span>
+<span id="cb1-4">input_file <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'directory/your_font.ttf'</span></span>
+<span id="cb1-5">output_dir <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'directory/your_new_font.ttf'</span></span>
+<span id="cb1-6"></span>
+<span id="cb1-7">factor <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.2</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># line spacing to add</span></span>
+<span id="cb1-8"></span>
+<span id="cb1-9"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> adjust(font, attribute, factor):</span>
+<span id="cb1-10">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"""Adjust an attribute of a font by a given factor."""</span></span>
+<span id="cb1-11">    original <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">getattr</span>(font, attribute)</span>
+<span id="cb1-12">    new <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span>(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">getattr</span>(font, attribute) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> factor)</span>
+<span id="cb1-13"></span>
+<span id="cb1-14">    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">setattr</span>(font, attribute, new)</span>
+<span id="cb1-15"></span>
+<span id="cb1-16"></span>
+<span id="cb1-17">font <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> fontforge.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">open</span>(input_file)</span>
+<span id="cb1-18"></span>
+<span id="cb1-19"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">''</span>)</span>
+<span id="cb1-20"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> prop <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'os2_winascent'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'os2_typoascent'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'hhea_ascent'</span>]:</span>
+<span id="cb1-21">    adjust(font, prop, factor)</span>
+<span id="cb1-22"></span>
+<span id="cb1-23"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> prop <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'os2_windescent'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'os2_typodescent'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'hhea_descent'</span>]:</span>
+<span id="cb1-24">    adjust(font, prop, factor <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span>
+<span id="cb1-25"></span>
+<span id="cb1-26"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> attr <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'fontname'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'familyname'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'fullname'</span>]:</span>
+<span id="cb1-27">    value <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">format</span>(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">getattr</span>(font, attr), factor)</span>
+<span id="cb1-28">    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">setattr</span>(font, attr, value)</span>
+<span id="cb1-29"></span>
+<span id="cb1-30">font.copyright <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"(c) </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> Acme Corp. All Rights Reserved."</span></span>
+<span id="cb1-31"></span>
+<span id="cb1-32">filename, extension <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> os.path.splitext(os.path.basename(input_file))</span>
+<span id="cb1-33">newFileName <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Patched </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{}{}</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">format</span>(filename, factor, extension)</span>
+<span id="cb1-34"></span>
+<span id="cb1-35">sfnt <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> {}</span>
+<span id="cb1-36"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> el <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> font.sfnt_names:</span>
+<span id="cb1-37">    sfnt[el[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> el</span>
+<span id="cb1-38"></span>
+<span id="cb1-39">sfnt[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"UniqueID"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> (<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'English (US)'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'UniqueID'</span>, font.fontname)</span>
+<span id="cb1-40">sfnt[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Preferred Family"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> (<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'English (US)'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Preferred Family'</span>, font.familyname)</span>
+<span id="cb1-41"></span>
+<span id="cb1-42">font.sfnt_names <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">tuple</span>(sfnt.values())</span>
+<span id="cb1-43"></span>
+<span id="cb1-44">font.save(output_dir <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"/"</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> newFileName)</span>
+<span id="cb1-45">font.generate(output_dir <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"/"</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> newFileName)</span></code></pre></div></div>
+</div>
+<p>And this is the result:</p>
+<section id="before" class="level1">
+<h1>Before</h1>
+<p><img src="http://timothymonteath.space/posts/blog_posts/assets/emacs_1.png" class="img-fluid"></p>
+</section>
+<section id="after" class="level1">
+<h1>After</h1>
+<p><img src="http://timothymonteath.space/posts/blog_posts/assets/emacs_2.png" class="img-fluid"></p>
+
+
+</section>
+
+ ]]></description>
+  <guid>http://timothymonteath.space/posts/blog_posts/Emacs_font_spacing.html</guid>
+  <pubDate>Sat, 22 Nov 2025 00:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

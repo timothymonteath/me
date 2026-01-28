@@ -1,1 +1,1 @@
-Sitemap: https://timothymonteath.github.io/me/sitemap.xml
+Sitemap: http://timothymonteath.space/sitemap.xml
