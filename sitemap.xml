@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://timothymonteath.space/blog.html</loc>
-    <lastmod>2025-10-14T14:31:01.510Z</lastmod>
+    <loc>http://timothymonteath.space/resources.html</loc>
+    <lastmod>2026-02-07T10:51:03.324Z</lastmod>
   </url>
   <url>
-    <loc>http://timothymonteath.space/publications.html</loc>
-    <lastmod>2026-01-26T16:30:53.853Z</lastmod>
+    <loc>http://timothymonteath.space/index.html</loc>
+    <lastmod>2026-01-26T16:21:06.042Z</lastmod>
+  </url>
+  <url>
+    <loc>http://timothymonteath.space/about.html</loc>
+    <lastmod>2025-10-14T16:22:26.760Z</lastmod>
   </url>
   <url>
     <loc>http://timothymonteath.space/posts/blog_posts/Emacs_font_spacing.html</loc>
@@ -17,11 +21,11 @@
     <lastmod>2023-08-24T15:09:28.000Z</lastmod>
   </url>
   <url>
-    <loc>http://timothymonteath.space/index.html</loc>
-    <lastmod>2026-01-26T16:21:06.042Z</lastmod>
+    <loc>http://timothymonteath.space/publications.html</loc>
+    <lastmod>2026-01-26T16:30:53.853Z</lastmod>
   </url>
   <url>
-    <loc>http://timothymonteath.space/about.html</loc>
-    <lastmod>2025-10-14T16:22:26.760Z</lastmod>
+    <loc>http://timothymonteath.space/blog.html</loc>
+    <lastmod>2025-10-14T14:31:01.510Z</lastmod>
   </url>
 </urlset>

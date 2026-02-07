@@ -1,17 +1,24 @@
 [
   {
-    "objectID": "blog.html",
-    "href": "blog.html",
-    "title": "Notes & Writing",
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "Resources",
     "section": "",
-    "text": "Line spacing in Emacs by making a new font\n\n\n\n\n\n\n\n\nJan 31, 2026\n\n\n\n\n\nNo matching items"
+    "text": "This is a collection of some bits an peices I have made for teaching and workshops. I’ve left them all here in the hope that they are of use :)\n=====\nA very quick introduction to QGIS and OpenStreetMap for our Inclusive Cartographies Workshop\nSome notes on working with EXIF data and images in R for IM946"
   },
   {
-    "objectID": "publications.html",
-    "href": "publications.html",
-    "title": "Publications",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": " ",
     "section": "",
-    "text": "=====\nORCID: 0000-0003-2481-9785\n=====\n\nBooks\n=====\n\\\n“Doing Open Social Science: A Guide for Researchers, with Patrick Dunleavy, (2026), LSE Press\n\\\n“The Atlas of Finance” with , Dariusz Wójcik, Panagiotis Iliopoulos, Stefanos Ioannou, Liam Keenan, Julien Migozzi, Timothy Monteath, Vladimír Pažitka, Morag Torrance, Michael Urban, James Cheshire, Oliver Uberti, (2024), Yale University Press.\n\\\n\n\nArticles\n=====\n“Changing lanes? Exploring mergers and acquisitions in the global auto sector through GPN 2.0”, with Liam Keenan and Dariusz Wójcik, (2025), Global Networks, doi:10.1111/glob.70028\n“Hungry for power: financialization and the concentration of corporate control in the global food system” with Liam Keenan and Dariusz Wójcik, (2023), Geoforum, doi:10.1016/j.geoforum.2023.103909\n\\\n“Financial discipline through inter-sectoral mergers and acquisitions: Exploring the convergence of Global Production Networks and the Global Financial Network” with Liam Keenan and Dariusz Wójcik, (2022), Environment and Planning A: Economy and Space, doi:10.1177/0308518X221115739\n\\\n“Patents over patients? Exploring the variegated financialization of the pharmaceuticals industry through mergers and acquisitions””, with Liam Keenan and Dariusz Wójcik, (2022), Competition & Change, doi:10.1177/10245294221107851; OA Link (with color figures!)\n\\\n=====\n\n\nBook Chapters\n=====\n“Challenging the Dogma of the Self-made Man: The Sunday Times Rich List Reexamined” with Elizabeth Schimpfoessl, (2022), in: eds, Sam Burgum and Katie Higgins, “How the Other Half Lives: Inter-connecting socio-spatial inequalities”, Manchester University Press; pre-print\n\\\n“The Culture of Elite Philanthropy: Russia and the United Kingdom Compared” with Elizabeth Schimpfoessl (2019), in: eds, Peter Duncan and Elizabeth Schimpfoessl, “Socialism, Capitalism and Alternatives: Area Studies and Global Theories”, London: UCL Press, (2019); OA Link\n\\\n=====\n\n\nReports\n=====\n“Diversity and Cyber Security Expertise” with Matt Spencer and Carlos Cámara-Menoyo, (2025), Policy Report.\n\\\n“Beyond Demographics: Behavioural Segmentation and Spatial Analytics to Enhance Visitor Experience at The British Museum” with Naomi Muggleton and Taha Yasseri, (2018, edited post-print 2025), for the British Museum and Turing Institute\n=====\n\n\nOther\n” The global food system is owned by an ever smaller number of companies – it’s damaging our health, our communities and the planet” with Liam Keenan and Dariusz Wójcik, (2022), for The Conversation\n=====\n\n\nThesis\n=====\nThe information infrastructure of land registration in England: a sociology of real estate at the intersection of elites, markets and statistics (2021) PhD Thesis, The London School of Economics and Political Science (LSE)."
+    "text": "Welcome!\n=====\n\\\nI am an Assistant Professor in the Centre for Interdisciplinary Methods at the University of Warwick. I teach on the Data Visulization MASc as well as several other course at CIM and Warwick.\n\\\nI am a co-author of the Atlas of Finance and on the forthcoming book Doing Open Social Science: A Handbook for Researchers, along with other academic publications\n\\\nI update this website sporadically with blog posts, tutorials and other tidbits. You can also follow me on Mastodon, bluesky or LinkedIn.\n\\\nYou can find more out about me here.\n=====\n\n\nLatest Notes & Writing\n=====\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLine spacing in Emacs by making a new font\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "I have a PhD in Sociology from the LSE where my research looked at the information infrastructure of land registration in England and Wales and ‘offshore’ property ownership.\n\\\nBefore this I studied for a MPhil in Modern Soceity and Global Transformation at Cambridge University and BA in International Relations and Security Studies at the Univerity of Bradford.\n\\\nAfter completing my PhD I moved onto Oxford University where I worked as a Research Associate in Finance and Geography as part of the CityNet Team.\n\\\nPrior to starting at Warwick I was an Associate Lecturer in Geography and Data Visualisation at UCL where I taught Cartography and Data Visualisation to undergraduate and masters students. While teaching at UCL I also worked as CIVICA Open Social Science Researcher at the LSE.\n\\\nI am currenlty working on the ESRC funded project ‘Can Digital Goods be Neutral? Evaluating OpenStreetMap’s equity through participatory data visualisation’ with Dr Carlos Cámara-Menoyo.\n\\\nYou can find out more about my publications here\n=====\nI built this website with quarto. It does not collect or record any information."
   },
   {
     "objectID": "posts/blog_posts/Emacs_font_spacing.html",
@@ -28,17 +35,17 @@
     "text": "much much more about me."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": " ",
+    "objectID": "publications.html",
+    "href": "publications.html",
+    "title": "Publications",
     "section": "",
-    "text": "Welcome!\n=====\n\\\nI am an Assistant Professor in the Centre for Interdisciplinary Methods at the University of Warwick. I teach on the Data Visulization MASc as well as several other course at CIM and Warwick.\n\\\nI am a co-author of the Atlas of Finance and on the forthcoming book Doing Open Social Science: A Handbook for Researchers, along with other academic publications\n\\\nI update this website sporadically with blog posts, tutorials and other tidbits. You can also follow me on Mastodon, bluesky or LinkedIn.\n\\\nYou can find more out about me here.\n=====\n\n\nLatest Notes & Writing\n=====\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLine spacing in Emacs by making a new font\n\n\n\n\nNo matching items"
+    "text": "=====\nORCID: 0000-0003-2481-9785\n=====\n\nBooks\n=====\n\\\n“Doing Open Social Science: A Guide for Researchers, with Patrick Dunleavy, (2026), LSE Press\n\\\n“The Atlas of Finance” with , Dariusz Wójcik, Panagiotis Iliopoulos, Stefanos Ioannou, Liam Keenan, Julien Migozzi, Timothy Monteath, Vladimír Pažitka, Morag Torrance, Michael Urban, James Cheshire, Oliver Uberti, (2024), Yale University Press.\n\\\n\n\nArticles\n=====\n“Changing lanes? Exploring mergers and acquisitions in the global auto sector through GPN 2.0”, with Liam Keenan and Dariusz Wójcik, (2025), Global Networks, doi:10.1111/glob.70028\n“Hungry for power: financialization and the concentration of corporate control in the global food system” with Liam Keenan and Dariusz Wójcik, (2023), Geoforum, doi:10.1016/j.geoforum.2023.103909\n\\\n“Financial discipline through inter-sectoral mergers and acquisitions: Exploring the convergence of Global Production Networks and the Global Financial Network” with Liam Keenan and Dariusz Wójcik, (2022), Environment and Planning A: Economy and Space, doi:10.1177/0308518X221115739\n\\\n“Patents over patients? Exploring the variegated financialization of the pharmaceuticals industry through mergers and acquisitions””, with Liam Keenan and Dariusz Wójcik, (2022), Competition & Change, doi:10.1177/10245294221107851; OA Link (with color figures!)\n\\\n=====\n\n\nBook Chapters\n=====\n“Challenging the Dogma of the Self-made Man: The Sunday Times Rich List Reexamined” with Elizabeth Schimpfoessl, (2022), in: eds, Sam Burgum and Katie Higgins, “How the Other Half Lives: Inter-connecting socio-spatial inequalities”, Manchester University Press; pre-print\n\\\n“The Culture of Elite Philanthropy: Russia and the United Kingdom Compared” with Elizabeth Schimpfoessl (2019), in: eds, Peter Duncan and Elizabeth Schimpfoessl, “Socialism, Capitalism and Alternatives: Area Studies and Global Theories”, London: UCL Press, (2019); OA Link\n\\\n=====\n\n\nReports\n=====\n“Diversity and Cyber Security Expertise” with Matt Spencer and Carlos Cámara-Menoyo, (2025), Policy Report.\n\\\n“Beyond Demographics: Behavioural Segmentation and Spatial Analytics to Enhance Visitor Experience at The British Museum” with Naomi Muggleton and Taha Yasseri, (2018, edited post-print 2025), for the British Museum and Turing Institute\n=====\n\n\nOther\n” The global food system is owned by an ever smaller number of companies – it’s damaging our health, our communities and the planet” with Liam Keenan and Dariusz Wójcik, (2022), for The Conversation\n=====\n\n\nThesis\n=====\nThe information infrastructure of land registration in England: a sociology of real estate at the intersection of elites, markets and statistics (2021) PhD Thesis, The London School of Economics and Political Science (LSE)."
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Notes & Writing",
     "section": "",
-    "text": "I have a PhD in Sociology from the LSE where my research looked at the information infrastructure of land registration in England and Wales and ‘offshore’ property ownership.\n\\\nBefore this I studied for a MPhil in Modern Soceity and Global Transformation at Cambridge University and BA in International Relations and Security Studies at the Univerity of Bradford.\n\\\nAfter completing my PhD I moved onto Oxford University where I worked as a Research Associate in Finance and Geography as part of the CityNet Team.\n\\\nPrior to starting at Warwick I was an Associate Lecturer in Geography and Data Visualisation at UCL where I taught Cartography and Data Visualisation to undergraduate and masters students. While teaching at UCL I also worked as CIVICA Open Social Science Researcher at the LSE.\n\\\nI am currenlty working on the ESRC funded project ‘Can Digital Goods be Neutral? Evaluating OpenStreetMap’s equity through participatory data visualisation’ with Dr Carlos Cámara-Menoyo.\n\\\nYou can find out more about my publications here\n=====\nI built this website with quarto. It does not collect or record any information."
+    "text": "Line spacing in Emacs by making a new font\n\n\n\n\n\n\n\n\nJan 31, 2026\n\n\n\n\n\nNo matching items"
   }
 ]
