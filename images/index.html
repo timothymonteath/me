@@ -1,0 +1,2906 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Timothy Monteath">
+<meta name="dcterms.date" content="2026-02-14">
+
+<title>Images as Data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-7fb9bbbe1bfe09c75bd4037f2fb0b0a3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="site_libs/wordcloud2-0.0.1/wordcloud.css" rel="stylesheet">
+<script src="site_libs/wordcloud2-0.0.1/wordcloud2-all.js"></script>
+<script src="site_libs/wordcloud2-0.0.1/hover.js"></script>
+<script src="site_libs/wordcloud2-binding-0.2.1/wordcloud2.js"></script>
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#hello" id="toc-hello" class="nav-link active" data-scroll-target="#hello">Hello!</a></li>
+  <li><a href="#sec-what" id="toc-sec-what" class="nav-link" data-scroll-target="#sec-what">Whats the data?</a></li>
+  <li><a href="#sec-exif" id="toc-sec-exif" class="nav-link" data-scroll-target="#sec-exif">Loading EXIF Data</a></li>
+  <li><a href="#sec-direct" id="toc-sec-direct" class="nav-link" data-scroll-target="#sec-direct">Direct Visulization</a></li>
+  <li><a href="#sec-gps" id="toc-sec-gps" class="nav-link" data-scroll-target="#sec-gps">GPS Data</a></li>
+  <li><a href="#sec-time" id="toc-sec-time" class="nav-link" data-scroll-target="#sec-time">Time Data</a></li>
+  <li><a href="#sec-color" id="toc-sec-color" class="nav-link" data-scroll-target="#sec-color">Color Data</a></li>
+  <li><a href="#sec-ocr" id="toc-sec-ocr" class="nav-link" data-scroll-target="#sec-ocr">OCR</a></li>
+  <li><a href="#sec-task" id="toc-sec-task" class="nav-link" data-scroll-target="#sec-task">Class Challange!</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Images as Data</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Timothy Monteath <a href="https://orcid.org/0000-0003-2481-9785" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            <a href="http://warwick.ac.uk/cim">
+            University of Warwick
+            </a>
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 14, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="hello" class="level1">
+<h1>Hello!</h1>
+<p>Welcome to IM946 week 5!</p>
+<p>This week we are going to be working with images as a form of data.</p>
+<p>Last week we looked at how to import images and photographs and how to read the EXIF metadata that is attached to these images. This week we are going to go thorough a series of examples to show how we can pull out different forms of data from a set of images and use this to create data visualizations.</p>
+<p>I have taken a set of example pictures for us to use for our class today. They are not very interesting pictures and are of me traveling from where I used to live in <a href="https://en.wikipedia.org/wiki/Hebden_Bridge">Hebden Bridge</a> (outside Manchester) to a classroom in Warwick. On my journey I tried to take a picture of what was in front of me every 5 minutes. This dataset is <strong>not</strong> captured with the intention of linking it to a larger political/economic/environmental issue, rather it was created so that the EXIF metadata was easily extractable and varied.</p>
+<p>Today we are going look at:</p>
+<ul>
+<li><a href="#sec-what" class="quarto-xref"><span>Whats the data?</span></a></li>
+<li><a href="#sec-exif" class="quarto-xref"><span>Loading EXIF Data</span></a></li>
+<li><a href="#sec-direct" class="quarto-xref"><span>Direct Visulization</span></a></li>
+<li><a href="#sec-gps" class="quarto-xref"><span>GPS Data</span></a></li>
+<li><a href="#sec-time" class="quarto-xref"><span>Time Data</span></a></li>
+<li><a href="#sec-color" class="quarto-xref"><span>Color Data</span></a></li>
+<li><a href="#sec-ocr" class="quarto-xref"><span>OCR</span></a></li>
+<li><a href="#sec-task" class="quarto-xref"><span>Class Challange!</span></a></li>
+</ul>
+<p><strong>The code below is example code of ways in which we can extract and work with code from image files. I would like you to read through the examples and think about if or how they could be useful for your project. Please feel free to ask questions, try it out for yourself, or adapt it for your own work!</strong></p>
+<p><em>For CDT students, all these examples are written in R. There is no expectation that you learn R or run this code. Rather, you can treat these as examples of what you can do programmatically with images and think about how you could do something similar in your notebooks.</em></p>
+</section>
+<section id="sec-what" class="level1">
+<h1>Whats the data?</h1>
+<p>Before diving into what we can do with these images and the EXIF data lets have a look at the images themselves.</p>
+<div id="fig-caption-images1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-caption-images1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magick) <span class="co"># load in the libraries we need to work with images</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(grDevices)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">10</span>), <span class="co"># set our canvas to plot with 5 rows and 10 columns</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)) <span class="co"># set no margins around our plots</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># there are 49 images to load them all in through a simple loop</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">49</span>){ </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  picture_path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">'media/photos/'</span>, n, <span class="st">'.jpeg'</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># all the images are named 1.jpg, 2.jpg, ect which makes them very easy to load in!</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  picture <span class="ot">&lt;-</span> <span class="fu">image_read</span>(picture_path)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(picture)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-caption-images1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.1: To get these images ready to use for today’s class, I modified them to make them much smaller using the <code>image_resize(img, "x500" )</code> function. This makes it easier to host online and much quicker to work with in R.
+</figcaption>
+</figure>
+</div>
+<p>If you would like to download a copy of these images to work through these examples you can do this from <a href="media/photos.zip">this link</a>.</p>
+</section>
+<section id="sec-exif" class="level1">
+<h1>Loading EXIF Data</h1>
+<p>Lets start by loading the EXIF data from these photos we can do this using the same tools and libraries that we looked at in last weeks class.</p>
+<p>Building a dataframe from EXIF data can sometimes be a little tricky as not all photographs may have the same number of metadata items attached to them. To overcome this challenge we are going to do this the easiest way possible by creating a blank <code>data.frame</code> and then looping through each picture, adding a new row to the dataframe each time.</p>
+<p>To do this we using the <code>rbind.fill()</code> function from the <code>plyr</code> library as this function allows data.frame with unequal numbers of columns to be combined together. This is a good example of a tricky, and potentially time consuming, data cleaning issue that talked about in Wednesdays class).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(exiftoolr) <span class="co"># load in our libraries</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plyr)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>all_exif <span class="ot">&lt;-</span> <span class="fu">data.frame</span>() <span class="co"># create a blank dataframe</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">49</span>){</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  picture_path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">'media/photos/'</span>, n, <span class="st">'.jpeg'</span>) <span class="co"># loop through our photos, as above</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  picture_exif <span class="ot">&lt;-</span> <span class="fu">exif_read</span>(picture_path) <span class="co"># read the EXIF data</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  all_exif <span class="ot">&lt;-</span> <span class="fu">rbind.fill</span>(all_exif, picture_exif)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="fig-caption-table1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-caption-table1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 0%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">SourceFile</th>
+<th style="text-align: left;">ExifToolVersion</th>
+<th style="text-align: left;">FileName</th>
+<th style="text-align: left;">Directory</th>
+<th style="text-align: left;">FileSize</th>
+<th style="text-align: left;">FileModifyDate</th>
+<th style="text-align: left;">FileAccessDate</th>
+<th style="text-align: left;">FileInodeChangeDate</th>
+<th style="text-align: left;">FilePermissions</th>
+<th style="text-align: left;">FileType</th>
+<th style="text-align: left;">FileTypeExtension</th>
+<th style="text-align: left;">MIMEType</th>
+<th style="text-align: left;">JFIFVersion</th>
+<th style="text-align: left;">HDRGainCurveSize</th>
+<th style="text-align: left;">HDRGainCurve</th>
+<th style="text-align: left;">ExifByteOrder</th>
+<th style="text-align: left;">Make</th>
+<th style="text-align: left;">Model</th>
+<th style="text-align: left;">Orientation</th>
+<th style="text-align: left;">XResolution</th>
+<th style="text-align: left;">YResolution</th>
+<th style="text-align: left;">ResolutionUnit</th>
+<th style="text-align: left;">Software</th>
+<th style="text-align: left;">ModifyDate</th>
+<th style="text-align: left;">HostComputer</th>
+<th style="text-align: left;">TileWidth</th>
+<th style="text-align: left;">TileLength</th>
+<th style="text-align: left;">YCbCrPositioning</th>
+<th style="text-align: left;">ExposureTime</th>
+<th style="text-align: left;">FNumber</th>
+<th style="text-align: left;">ExposureProgram</th>
+<th style="text-align: left;">ISO</th>
+<th style="text-align: left;">ExifVersion</th>
+<th style="text-align: left;">DateTimeOriginal</th>
+<th style="text-align: left;">CreateDate</th>
+<th style="text-align: left;">ComponentsConfiguration</th>
+<th style="text-align: left;">ShutterSpeedValue</th>
+<th style="text-align: left;">ApertureValue</th>
+<th style="text-align: left;">BrightnessValue</th>
+<th style="text-align: left;">ExposureCompensation</th>
+<th style="text-align: left;">MeteringMode</th>
+<th style="text-align: left;">Flash</th>
+<th style="text-align: left;">FocalLength</th>
+<th style="text-align: left;">SubjectArea</th>
+<th style="text-align: left;">MakerNoteVersion</th>
+<th style="text-align: left;">RunTimeFlags</th>
+<th style="text-align: left;">RunTimeValue</th>
+<th style="text-align: left;">RunTimeScale</th>
+<th style="text-align: left;">RunTimeEpoch</th>
+<th style="text-align: left;">AEStable</th>
+<th style="text-align: left;">AETarget</th>
+<th style="text-align: left;">AEAverage</th>
+<th style="text-align: left;">AFStable</th>
+<th style="text-align: left;">AccelerationVector</th>
+<th style="text-align: left;">FocusDistanceRange</th>
+<th style="text-align: left;">ImageCaptureType</th>
+<th style="text-align: left;">LivePhotoVideoIndex</th>
+<th style="text-align: left;">PhotosAppFeatureFlags</th>
+<th style="text-align: left;">HDRHeadroom</th>
+<th style="text-align: left;">AFPerformance</th>
+<th style="text-align: left;">SignalToNoiseRatio</th>
+<th style="text-align: left;">PhotoIdentifier</th>
+<th style="text-align: left;">ColorTemperature</th>
+<th style="text-align: left;">CameraType</th>
+<th style="text-align: left;">FocusPosition</th>
+<th style="text-align: left;">SubSecTimeOriginal</th>
+<th style="text-align: left;">SubSecTimeDigitized</th>
+<th style="text-align: left;">FlashpixVersion</th>
+<th style="text-align: left;">ColorSpace</th>
+<th style="text-align: left;">ExifImageWidth</th>
+<th style="text-align: left;">ExifImageHeight</th>
+<th style="text-align: left;">SensingMethod</th>
+<th style="text-align: left;">SceneType</th>
+<th style="text-align: left;">ExposureMode</th>
+<th style="text-align: left;">WhiteBalance</th>
+<th style="text-align: left;">FocalLengthIn35mmFormat</th>
+<th style="text-align: left;">SceneCaptureType</th>
+<th style="text-align: left;">LensInfo</th>
+<th style="text-align: left;">LensMake</th>
+<th style="text-align: left;">LensModel</th>
+<th style="text-align: left;">CompositeImage</th>
+<th style="text-align: left;">GPSLatitudeRef</th>
+<th style="text-align: left;">GPSLongitudeRef</th>
+<th style="text-align: left;">GPSAltitudeRef</th>
+<th style="text-align: left;">GPSTimeStamp</th>
+<th style="text-align: left;">GPSSpeedRef</th>
+<th style="text-align: left;">GPSSpeed</th>
+<th style="text-align: left;">GPSImgDirectionRef</th>
+<th style="text-align: left;">GPSImgDirection</th>
+<th style="text-align: left;">GPSDestBearingRef</th>
+<th style="text-align: left;">GPSDestBearing</th>
+<th style="text-align: left;">GPSDateStamp</th>
+<th style="text-align: left;">GPSHPositioningError</th>
+<th style="text-align: left;">ProfileCMMType</th>
+<th style="text-align: left;">ProfileVersion</th>
+<th style="text-align: left;">ProfileClass</th>
+<th style="text-align: left;">ColorSpaceData</th>
+<th style="text-align: left;">ProfileConnectionSpace</th>
+<th style="text-align: left;">ProfileDateTime</th>
+<th style="text-align: left;">ProfileFileSignature</th>
+<th style="text-align: left;">PrimaryPlatform</th>
+<th style="text-align: left;">CMMFlags</th>
+<th style="text-align: left;">DeviceManufacturer</th>
+<th style="text-align: left;">DeviceModel</th>
+<th style="text-align: left;">DeviceAttributes</th>
+<th style="text-align: left;">RenderingIntent</th>
+<th style="text-align: left;">ConnectionSpaceIlluminant</th>
+<th style="text-align: left;">ProfileCreator</th>
+<th style="text-align: left;">ProfileID</th>
+<th style="text-align: left;">ProfileDescription</th>
+<th style="text-align: left;">ProfileCopyright</th>
+<th style="text-align: left;">MediaWhitePoint</th>
+<th style="text-align: left;">RedMatrixColumn</th>
+<th style="text-align: left;">GreenMatrixColumn</th>
+<th style="text-align: left;">BlueMatrixColumn</th>
+<th style="text-align: left;">RedTRC</th>
+<th style="text-align: left;">ChromaticAdaptation</th>
+<th style="text-align: left;">BlueTRC</th>
+<th style="text-align: left;">GreenTRC</th>
+<th style="text-align: left;">ImageWidth</th>
+<th style="text-align: left;">ImageHeight</th>
+<th style="text-align: left;">EncodingProcess</th>
+<th style="text-align: left;">BitsPerSample</th>
+<th style="text-align: left;">ColorComponents</th>
+<th style="text-align: left;">YCbCrSubSampling</th>
+<th style="text-align: left;">RunTimeSincePowerUp</th>
+<th style="text-align: left;">Aperture</th>
+<th style="text-align: left;">ImageSize</th>
+<th style="text-align: left;">Megapixels</th>
+<th style="text-align: left;">ScaleFactor35efl</th>
+<th style="text-align: left;">ShutterSpeed</th>
+<th style="text-align: left;">SubSecCreateDate</th>
+<th style="text-align: left;">SubSecDateTimeOriginal</th>
+<th style="text-align: left;">GPSAltitude</th>
+<th style="text-align: left;">GPSDateTime</th>
+<th style="text-align: left;">GPSLatitude</th>
+<th style="text-align: left;">GPSLongitude</th>
+<th style="text-align: left;">CircleOfConfusion</th>
+<th style="text-align: left;">FOV</th>
+<th style="text-align: left;">FocalLength35efl</th>
+<th style="text-align: left;">GPSPosition</th>
+<th style="text-align: left;">HyperfocalDistance</th>
+<th style="text-align: left;">LightValue</th>
+<th style="text-align: left;">LensID</th>
+<th style="text-align: left;">XMPToolkit</th>
+<th style="text-align: left;">CreatorTool</th>
+<th style="text-align: left;">DateCreated</th>
+<th style="text-align: left;">RegionAreaY</th>
+<th style="text-align: left;">RegionAreaW</th>
+<th style="text-align: left;">RegionAreaX</th>
+<th style="text-align: left;">RegionAreaH</th>
+<th style="text-align: left;">RegionAreaUnit</th>
+<th style="text-align: left;">RegionType</th>
+<th style="text-align: left;">RegionExtensionsAngleInfoYaw</th>
+<th style="text-align: left;">RegionExtensionsAngleInfoRoll</th>
+<th style="text-align: left;">RegionExtensionsConfidenceLevel</th>
+<th style="text-align: left;">RegionExtensionsFaceID</th>
+<th style="text-align: left;">RegionAppliedToDimensionsH</th>
+<th style="text-align: left;">RegionAppliedToDimensionsW</th>
+<th style="text-align: left;">RegionAppliedToDimensionsUnit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">media/photos/1.jpeg</td>
+<td style="text-align: left;">13.44</td>
+<td style="text-align: left;">1.jpeg</td>
+<td style="text-align: left;">media/photos</td>
+<td style="text-align: left;">75614</td>
+<td style="text-align: left;">2024:02:25 14:10:35+</td>
+<td style="text-align: left;">2026:02:12 14:53:45+</td>
+<td style="text-align: left;">2026:02:12 14:53:40+</td>
+<td style="text-align: left;">100644</td>
+<td style="text-align: left;">JPEG</td>
+<td style="text-align: left;">JPG</td>
+<td style="text-align: left;">image/jpeg</td>
+<td style="text-align: left;">1 1</td>
+<td style="text-align: left;">251</td>
+<td style="text-align: left;">3691 7683 11382 1502</td>
+<td style="text-align: left;">MM</td>
+<td style="text-align: left;">Apple</td>
+<td style="text-align: left;">iPhone XS Max</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">16.3.1</td>
+<td style="text-align: left;">2024:02:09 07:38:05</td>
+<td style="text-align: left;">iPhone XS Max</td>
+<td style="text-align: left;">512</td>
+<td style="text-align: left;">512</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0.01666666667</td>
+<td style="text-align: left;">1.8</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">320</td>
+<td style="text-align: left;">0232</td>
+<td style="text-align: left;">2024:02:09 07:38:05</td>
+<td style="text-align: left;">2024:02:09 07:38:05</td>
+<td style="text-align: left;">1 2 3 0</td>
+<td style="text-align: left;">0.0165679999782223</td>
+<td style="text-align: left;">1.79999999993144</td>
+<td style="text-align: left;">1.510567669</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">4.25</td>
+<td style="text-align: left;">2013 1511 2217 1393</td>
+<td style="text-align: left;">14</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">176357126276750</td>
+<td style="text-align: left;">1000000000</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">186</td>
+<td style="text-align: left;">191</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">-0.03880077602 -1.00</td>
+<td style="text-align: left;">2.9609375 2.30078125</td>
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">13639680</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">1.686418056</td>
+<td style="text-align: left;">157 268435570</td>
+<td style="text-align: left;">33.00339506</td>
+<td style="text-align: left;">0C54A3EE-31E2-43C9-A</td>
+<td style="text-align: left;">7531</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">59</td>
+<td style="text-align: left;">758</td>
+<td style="text-align: left;">758</td>
+<td style="text-align: left;">0100</td>
+<td style="text-align: left;">65535</td>
+<td style="text-align: left;">4032</td>
+<td style="text-align: left;">3024</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">26</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">4.25 6 1.8 2.4</td>
+<td style="text-align: left;">Apple</td>
+<td style="text-align: left;">iPhone XS Max back d</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">W</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">20:00:00</td>
+<td style="text-align: left;">K</td>
+<td style="text-align: left;">0.02899493462</td>
+<td style="text-align: left;">T</td>
+<td style="text-align: left;">253.1574557</td>
+<td style="text-align: left;">T</td>
+<td style="text-align: left;">253.1574557</td>
+<td style="text-align: left;">2024:02:09</td>
+<td style="text-align: left;">13.7876972</td>
+<td style="text-align: left;">appl</td>
+<td style="text-align: left;">1024</td>
+<td style="text-align: left;">mntr</td>
+<td style="text-align: left;">RGB</td>
+<td style="text-align: left;">XYZ</td>
+<td style="text-align: left;">2022:01:01 00:00:00</td>
+<td style="text-align: left;">acsp</td>
+<td style="text-align: left;">APPL</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">APPL</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">0 0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0.9642 1 0.82491</td>
+<td style="text-align: left;">appl</td>
+<td style="text-align: left;">236 253 163 142 56 1</td>
+<td style="text-align: left;">Display P3</td>
+<td style="text-align: left;">Copyright Apple Inc.</td>
+<td style="text-align: left;">0.96419 1 0.82489</td>
+<td style="text-align: left;">0.51512 0.2412 -0.00</td>
+<td style="text-align: left;">0.29198 0.69225 0.04</td>
+<td style="text-align: left;">0.1571 0.06657 0.784</td>
+<td style="text-align: left;">base64:cGFyYQAAAAAAA</td>
+<td style="text-align: left;">1.04788 0.02292 -0.0</td>
+<td style="text-align: left;">base64:cGFyYQAAAAAAA</td>
+<td style="text-align: left;">base64:cGFyYQAAAAAAA</td>
+<td style="text-align: left;">375</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">2 2</td>
+<td style="text-align: left;">176357.12627675</td>
+<td style="text-align: left;">1.8</td>
+<td style="text-align: left;">375 500</td>
+<td style="text-align: left;">0.1875</td>
+<td style="text-align: left;">6.11764705882353</td>
+<td style="text-align: left;">0.01666666667</td>
+<td style="text-align: left;">2024:02:09 07:38:05.</td>
+<td style="text-align: left;">2024:02:09 07:38:05.</td>
+<td style="text-align: left;">110.8395769</td>
+<td style="text-align: left;">2024:02:09 20:00:00Z</td>
+<td style="text-align: left;">53.7416444444444</td>
+<td style="text-align: left;">-2.01625555555556</td>
+<td style="text-align: left;">0.00491140798741088</td>
+<td style="text-align: left;">69.3903656740024</td>
+<td style="text-align: left;">26</td>
+<td style="text-align: left;">53.7416444444444 -2.</td>
+<td style="text-align: left;">2.04314572276293</td>
+<td style="text-align: left;">5.92481250331724</td>
+<td style="text-align: left;">iPhone XS Max back d</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">media/photos/2.jpeg</td>
+<td style="text-align: left;">13.44</td>
+<td style="text-align: left;">2.jpeg</td>
+<td style="text-align: left;">media/photos</td>
+<td style="text-align: left;">79574</td>
+<td style="text-align: left;">2024:02:25 14:10:35+</td>
+<td style="text-align: left;">2026:02:12 14:53:45+</td>
+<td style="text-align: left;">2026:02:12 14:53:42+</td>
+<td style="text-align: left;">100644</td>
+<td style="text-align: left;">JPEG</td>
+<td style="text-align: left;">JPG</td>
+<td style="text-align: left;">image/jpeg</td>
+<td style="text-align: left;">1 1</td>
+<td style="text-align: left;">251</td>
+<td style="text-align: left;">3304 6809 10550 1441</td>
+<td style="text-align: left;">MM</td>
+<td style="text-align: left;">Apple</td>
+<td style="text-align: left;">iPhone XS Max</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">16.3.1</td>
+<td style="text-align: left;">2024:02:09 07:42:56</td>
+<td style="text-align: left;">iPhone XS Max</td>
+<td style="text-align: left;">512</td>
+<td style="text-align: left;">512</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0.01666666667</td>
+<td style="text-align: left;">1.8</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">160</td>
+<td style="text-align: left;">0232</td>
+<td style="text-align: left;">2024:02:09 07:42:56</td>
+<td style="text-align: left;">2024:02:09 07:42:56</td>
+<td style="text-align: left;">1 2 3 0</td>
+<td style="text-align: left;">0.0165679999782223</td>
+<td style="text-align: left;">1.79999999993144</td>
+<td style="text-align: left;">2.564540738</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">4.25</td>
+<td style="text-align: left;">2013 1511 2217 1393</td>
+<td style="text-align: left;">14</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">176608655067208</td>
+<td style="text-align: left;">1000000000</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">173</td>
+<td style="text-align: left;">176</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0.0218595639 -1.0003</td>
+<td style="text-align: left;">0.7265625 0.4296875</td>
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">13639680</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">1.686418056</td>
+<td style="text-align: left;">105 268435497</td>
+<td style="text-align: left;">36.20163728</td>
+<td style="text-align: left;">6D38E07B-7BF2-4836-9</td>
+<td style="text-align: left;">7531</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">59</td>
+<td style="text-align: left;">168</td>
+<td style="text-align: left;">168</td>
+<td style="text-align: left;">0100</td>
+<td style="text-align: left;">65535</td>
+<td style="text-align: left;">4032</td>
+<td style="text-align: left;">3024</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">26</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">4.25 6 1.8 2.4</td>
+<td style="text-align: left;">Apple</td>
+<td style="text-align: left;">iPhone XS Max back d</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">W</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">20:00:00</td>
+<td style="text-align: left;">K</td>
+<td style="text-align: left;">2.097243071</td>
+<td style="text-align: left;">T</td>
+<td style="text-align: left;">112.0013657</td>
+<td style="text-align: left;">T</td>
+<td style="text-align: left;">112.0013657</td>
+<td style="text-align: left;">2024:02:09</td>
+<td style="text-align: left;">33.24521744</td>
+<td style="text-align: left;">appl</td>
+<td style="text-align: left;">1024</td>
+<td style="text-align: left;">mntr</td>
+<td style="text-align: left;">RGB</td>
+<td style="text-align: left;">XYZ</td>
+<td style="text-align: left;">2022:01:01 00:00:00</td>
+<td style="text-align: left;">acsp</td>
+<td style="text-align: left;">APPL</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">APPL</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">0 0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0.9642 1 0.82491</td>
+<td style="text-align: left;">appl</td>
+<td style="text-align: left;">236 253 163 142 56 1</td>
+<td style="text-align: left;">Display P3</td>
+<td style="text-align: left;">Copyright Apple Inc.</td>
+<td style="text-align: left;">0.96419 1 0.82489</td>
+<td style="text-align: left;">0.51512 0.2412 -0.00</td>
+<td style="text-align: left;">0.29198 0.69225 0.04</td>
+<td style="text-align: left;">0.1571 0.06657 0.784</td>
+<td style="text-align: left;">base64:cGFyYQAAAAAAA</td>
+<td style="text-align: left;">1.04788 0.02292 -0.0</td>
+<td style="text-align: left;">base64:cGFyYQAAAAAAA</td>
+<td style="text-align: left;">base64:cGFyYQAAAAAAA</td>
+<td style="text-align: left;">375</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">2 2</td>
+<td style="text-align: left;">176608.655067208</td>
+<td style="text-align: left;">1.8</td>
+<td style="text-align: left;">375 500</td>
+<td style="text-align: left;">0.1875</td>
+<td style="text-align: left;">6.11764705882353</td>
+<td style="text-align: left;">0.01666666667</td>
+<td style="text-align: left;">2024:02:09 07:42:56.</td>
+<td style="text-align: left;">2024:02:09 07:42:56.</td>
+<td style="text-align: left;">101.0746739</td>
+<td style="text-align: left;">2024:02:09 20:00:00Z</td>
+<td style="text-align: left;">53.7405083333333</td>
+<td style="text-align: left;">-2.01409444444444</td>
+<td style="text-align: left;">0.00491140798741088</td>
+<td style="text-align: left;">69.3903656740024</td>
+<td style="text-align: left;">26</td>
+<td style="text-align: left;">53.7405083333333 -2.</td>
+<td style="text-align: left;">2.04314572276293</td>
+<td style="text-align: left;">6.92481250331724</td>
+<td style="text-align: left;">iPhone XS Max back d</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">media/photos/3.jpeg</td>
+<td style="text-align: left;">13.44</td>
+<td style="text-align: left;">3.jpeg</td>
+<td style="text-align: left;">media/photos</td>
+<td style="text-align: left;">103244</td>
+<td style="text-align: left;">2024:02:25 14:10:36+</td>
+<td style="text-align: left;">2026:02:12 14:53:45+</td>
+<td style="text-align: left;">2026:02:12 14:53:42+</td>
+<td style="text-align: left;">100644</td>
+<td style="text-align: left;">JPEG</td>
+<td style="text-align: left;">JPG</td>
+<td style="text-align: left;">image/jpeg</td>
+<td style="text-align: left;">1 1</td>
+<td style="text-align: left;">251</td>
+<td style="text-align: left;">8069 15882 23790 316</td>
+<td style="text-align: left;">MM</td>
+<td style="text-align: left;">Apple</td>
+<td style="text-align: left;">iPhone XS Max</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">16.3.1</td>
+<td style="text-align: left;">2024:02:09 07:48:53</td>
+<td style="text-align: left;">iPhone XS Max</td>
+<td style="text-align: left;">512</td>
+<td style="text-align: left;">512</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0.04</td>
+<td style="text-align: left;">1.8</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">320</td>
+<td style="text-align: left;">0232</td>
+<td style="text-align: left;">2024:02:09 07:48:53</td>
+<td style="text-align: left;">2024:02:09 07:48:53</td>
+<td style="text-align: left;">1 2 3 0</td>
+<td style="text-align: left;">0.0399920000731997</td>
+<td style="text-align: left;">1.79999999993144</td>
+<td style="text-align: left;">-0.0478944311</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">4.25</td>
+<td style="text-align: left;">2013 1511 2217 1393</td>
+<td style="text-align: left;">14</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">176878939595083</td>
+<td style="text-align: left;">1000000000</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">172</td>
+<td style="text-align: left;">166</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0.0207697507 -0.9942</td>
+<td style="text-align: left;">1.59765625 1.09375</td>
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">13639680</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">67 268435563</td>
+<td style="text-align: left;">28.24822425</td>
+<td style="text-align: left;">25F6B2C6-8939-4EA6-8</td>
+<td style="text-align: left;">2858</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">65</td>
+<td style="text-align: left;">566</td>
+<td style="text-align: left;">566</td>
+<td style="text-align: left;">0100</td>
+<td style="text-align: left;">65535</td>
+<td style="text-align: left;">4032</td>
+<td style="text-align: left;">3024</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">26</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">4.25 6 1.8 2.4</td>
+<td style="text-align: left;">Apple</td>
+<td style="text-align: left;">iPhone XS Max back d</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">W</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">20:00:00</td>
+<td style="text-align: left;">K</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">T</td>
+<td style="text-align: left;">244.7424623</td>
+<td style="text-align: left;">T</td>
+<td style="text-align: left;">244.7424623</td>
+<td style="text-align: left;">2024:02:09</td>
+<td style="text-align: left;">8.590117966</td>
+<td style="text-align: left;">appl</td>
+<td style="text-align: left;">1024</td>
+<td style="text-align: left;">mntr</td>
+<td style="text-align: left;">RGB</td>
+<td style="text-align: left;">XYZ</td>
+<td style="text-align: left;">2022:01:01 00:00:00</td>
+<td style="text-align: left;">acsp</td>
+<td style="text-align: left;">APPL</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">APPL</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">0 0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0.9642 1 0.82491</td>
+<td style="text-align: left;">appl</td>
+<td style="text-align: left;">236 253 163 142 56 1</td>
+<td style="text-align: left;">Display P3</td>
+<td style="text-align: left;">Copyright Apple Inc.</td>
+<td style="text-align: left;">0.96419 1 0.82489</td>
+<td style="text-align: left;">0.51512 0.2412 -0.00</td>
+<td style="text-align: left;">0.29198 0.69225 0.04</td>
+<td style="text-align: left;">0.1571 0.06657 0.784</td>
+<td style="text-align: left;">base64:cGFyYQAAAAAAA</td>
+<td style="text-align: left;">1.04788 0.02292 -0.0</td>
+<td style="text-align: left;">base64:cGFyYQAAAAAAA</td>
+<td style="text-align: left;">base64:cGFyYQAAAAAAA</td>
+<td style="text-align: left;">375</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">2 2</td>
+<td style="text-align: left;">176878.939595083</td>
+<td style="text-align: left;">1.8</td>
+<td style="text-align: left;">375 500</td>
+<td style="text-align: left;">0.1875</td>
+<td style="text-align: left;">6.11764705882353</td>
+<td style="text-align: left;">0.04</td>
+<td style="text-align: left;">2024:02:09 07:48:53.</td>
+<td style="text-align: left;">2024:02:09 07:48:53.</td>
+<td style="text-align: left;">105.9569265</td>
+<td style="text-align: left;">2024:02:09 20:00:00Z</td>
+<td style="text-align: left;">53.7378888888889</td>
+<td style="text-align: left;">-2.00883055555556</td>
+<td style="text-align: left;">0.00491140798741088</td>
+<td style="text-align: left;">69.3903656740024</td>
+<td style="text-align: left;">26</td>
+<td style="text-align: left;">53.7378888888889 -2.</td>
+<td style="text-align: left;">2.04314572276293</td>
+<td style="text-align: left;">4.66177809777199</td>
+<td style="text-align: left;">iPhone XS Max back d</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">media/photos/4.jpeg</td>
+<td style="text-align: left;">13.44</td>
+<td style="text-align: left;">4.jpeg</td>
+<td style="text-align: left;">media/photos</td>
+<td style="text-align: left;">56051</td>
+<td style="text-align: left;">2024:02:25 14:10:36+</td>
+<td style="text-align: left;">2026:02:12 14:53:45+</td>
+<td style="text-align: left;">2026:02:12 14:53:42+</td>
+<td style="text-align: left;">100644</td>
+<td style="text-align: left;">JPEG</td>
+<td style="text-align: left;">JPG</td>
+<td style="text-align: left;">image/jpeg</td>
+<td style="text-align: left;">1 1</td>
+<td style="text-align: left;">251</td>
+<td style="text-align: left;">12438 24946 37155 49</td>
+<td style="text-align: left;">MM</td>
+<td style="text-align: left;">Apple</td>
+<td style="text-align: left;">iPhone XS Max</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">16.3.1</td>
+<td style="text-align: left;">2024:02:09 07:53:55</td>
+<td style="text-align: left;">iPhone XS Max</td>
+<td style="text-align: left;">512</td>
+<td style="text-align: left;">512</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0.01666666667</td>
+<td style="text-align: left;">1.8</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">250</td>
+<td style="text-align: left;">0232</td>
+<td style="text-align: left;">2024:02:09 07:53:55</td>
+<td style="text-align: left;">2024:02:09 07:53:55</td>
+<td style="text-align: left;">1 2 3 0</td>
+<td style="text-align: left;">0.0165679999782223</td>
+<td style="text-align: left;">1.79999999993144</td>
+<td style="text-align: left;">1.583796104</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">4.25</td>
+<td style="text-align: left;">2013 1511 2217 1393</td>
+<td style="text-align: left;">14</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">177066956766750</td>
+<td style="text-align: left;">1000000000</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">169</td>
+<td style="text-align: left;">164</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0.07634519039 -0.791</td>
+<td style="text-align: left;">4.1171875 3.36328125</td>
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">13639680</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">8 268435797</td>
+<td style="text-align: left;">33.22625733</td>
+<td style="text-align: left;">37AC8A42-8D1C-4BCF-B</td>
+<td style="text-align: left;">6618</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">231</td>
+<td style="text-align: left;">658</td>
+<td style="text-align: left;">658</td>
+<td style="text-align: left;">0100</td>
+<td style="text-align: left;">65535</td>
+<td style="text-align: left;">4032</td>
+<td style="text-align: left;">3024</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">26</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">4.25 6 1.8 2.4</td>
+<td style="text-align: left;">Apple</td>
+<td style="text-align: left;">iPhone XS Max back d</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">W</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">20:00:00</td>
+<td style="text-align: left;">K</td>
+<td style="text-align: left;">0.2655441764</td>
+<td style="text-align: left;">T</td>
+<td style="text-align: left;">86.43673707</td>
+<td style="text-align: left;">T</td>
+<td style="text-align: left;">86.43673707</td>
+<td style="text-align: left;">2024:02:09</td>
+<td style="text-align: left;">17.58620243</td>
+<td style="text-align: left;">appl</td>
+<td style="text-align: left;">1024</td>
+<td style="text-align: left;">mntr</td>
+<td style="text-align: left;">RGB</td>
+<td style="text-align: left;">XYZ</td>
+<td style="text-align: left;">2022:01:01 00:00:00</td>
+<td style="text-align: left;">acsp</td>
+<td style="text-align: left;">APPL</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">APPL</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">0 0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0.9642 1 0.82491</td>
+<td style="text-align: left;">appl</td>
+<td style="text-align: left;">236 253 163 142 56 1</td>
+<td style="text-align: left;">Display P3</td>
+<td style="text-align: left;">Copyright Apple Inc.</td>
+<td style="text-align: left;">0.96419 1 0.82489</td>
+<td style="text-align: left;">0.51512 0.2412 -0.00</td>
+<td style="text-align: left;">0.29198 0.69225 0.04</td>
+<td style="text-align: left;">0.1571 0.06657 0.784</td>
+<td style="text-align: left;">base64:cGFyYQAAAAAAA</td>
+<td style="text-align: left;">1.04788 0.02292 -0.0</td>
+<td style="text-align: left;">base64:cGFyYQAAAAAAA</td>
+<td style="text-align: left;">base64:cGFyYQAAAAAAA</td>
+<td style="text-align: left;">375</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">2 2</td>
+<td style="text-align: left;">177066.95676675</td>
+<td style="text-align: left;">1.8</td>
+<td style="text-align: left;">375 500</td>
+<td style="text-align: left;">0.1875</td>
+<td style="text-align: left;">6.11764705882353</td>
+<td style="text-align: left;">0.01666666667</td>
+<td style="text-align: left;">2024:02:09 07:53:55.</td>
+<td style="text-align: left;">2024:02:09 07:53:55.</td>
+<td style="text-align: left;">107.8988345</td>
+<td style="text-align: left;">2024:02:09 20:00:00Z</td>
+<td style="text-align: left;">53.7379305555556</td>
+<td style="text-align: left;">-2.00911388888889</td>
+<td style="text-align: left;">0.00491140798741088</td>
+<td style="text-align: left;">69.3903656740024</td>
+<td style="text-align: left;">26</td>
+<td style="text-align: left;">53.7379305555556 -2.</td>
+<td style="text-align: left;">2.04314572276293</td>
+<td style="text-align: left;">6.28095631354252</td>
+<td style="text-align: left;">iPhone XS Max back d</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">media/photos/5.jpeg</td>
+<td style="text-align: left;">13.44</td>
+<td style="text-align: left;">5.jpeg</td>
+<td style="text-align: left;">media/photos</td>
+<td style="text-align: left;">114105</td>
+<td style="text-align: left;">2024:02:25 14:10:36+</td>
+<td style="text-align: left;">2026:02:12 14:53:45+</td>
+<td style="text-align: left;">2026:02:12 14:53:42+</td>
+<td style="text-align: left;">100644</td>
+<td style="text-align: left;">JPEG</td>
+<td style="text-align: left;">JPG</td>
+<td style="text-align: left;">image/jpeg</td>
+<td style="text-align: left;">1 1</td>
+<td style="text-align: left;">251</td>
+<td style="text-align: left;">13268 26261 38926 51</td>
+<td style="text-align: left;">MM</td>
+<td style="text-align: left;">Apple</td>
+<td style="text-align: left;">iPhone XS Max</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">16.3.1</td>
+<td style="text-align: left;">2024:02:09 07:59:26</td>
+<td style="text-align: left;">iPhone XS Max</td>
+<td style="text-align: left;">512</td>
+<td style="text-align: left;">512</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0.02</td>
+<td style="text-align: left;">1.8</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">200</td>
+<td style="text-align: left;">0232</td>
+<td style="text-align: left;">2024:02:09 07:59:26</td>
+<td style="text-align: left;">2024:02:09 07:59:26</td>
+<td style="text-align: left;">1 2 3 0</td>
+<td style="text-align: left;">0.0199939999476312</td>
+<td style="text-align: left;">1.79999999993144</td>
+<td style="text-align: left;">1.729386043</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">4.25</td>
+<td style="text-align: left;">2013 1511 2217 1393</td>
+<td style="text-align: left;">14</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">177392672294583</td>
+<td style="text-align: left;">1000000000</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">190</td>
+<td style="text-align: left;">166</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">-0.0090702204 -1.004</td>
+<td style="text-align: left;">5.14453125 2.3046875</td>
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">13639680</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">112 268435591</td>
+<td style="text-align: left;">33.62224582</td>
+<td style="text-align: left;">D001CCA7-8D00-4C1F-9</td>
+<td style="text-align: left;">6777</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">54</td>
+<td style="text-align: left;">889</td>
+<td style="text-align: left;">889</td>
+<td style="text-align: left;">0100</td>
+<td style="text-align: left;">65535</td>
+<td style="text-align: left;">4032</td>
+<td style="text-align: left;">3024</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">26</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">4.25 6 1.8 2.4</td>
+<td style="text-align: left;">Apple</td>
+<td style="text-align: left;">iPhone XS Max back d</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">W</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">20:00:00</td>
+<td style="text-align: left;">K</td>
+<td style="text-align: left;">0.6883943678</td>
+<td style="text-align: left;">T</td>
+<td style="text-align: left;">314.2805789</td>
+<td style="text-align: left;">T</td>
+<td style="text-align: left;">314.2805789</td>
+<td style="text-align: left;">2024:02:09</td>
+<td style="text-align: left;">28.84374421</td>
+<td style="text-align: left;">appl</td>
+<td style="text-align: left;">1024</td>
+<td style="text-align: left;">mntr</td>
+<td style="text-align: left;">RGB</td>
+<td style="text-align: left;">XYZ</td>
+<td style="text-align: left;">2022:01:01 00:00:00</td>
+<td style="text-align: left;">acsp</td>
+<td style="text-align: left;">APPL</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">APPL</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">0 0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0.9642 1 0.82491</td>
+<td style="text-align: left;">appl</td>
+<td style="text-align: left;">236 253 163 142 56 1</td>
+<td style="text-align: left;">Display P3</td>
+<td style="text-align: left;">Copyright Apple Inc.</td>
+<td style="text-align: left;">0.96419 1 0.82489</td>
+<td style="text-align: left;">0.51512 0.2412 -0.00</td>
+<td style="text-align: left;">0.29198 0.69225 0.04</td>
+<td style="text-align: left;">0.1571 0.06657 0.784</td>
+<td style="text-align: left;">base64:cGFyYQAAAAAAA</td>
+<td style="text-align: left;">1.04788 0.02292 -0.0</td>
+<td style="text-align: left;">base64:cGFyYQAAAAAAA</td>
+<td style="text-align: left;">base64:cGFyYQAAAAAAA</td>
+<td style="text-align: left;">375</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">2 2</td>
+<td style="text-align: left;">177392.672294583</td>
+<td style="text-align: left;">1.8</td>
+<td style="text-align: left;">375 500</td>
+<td style="text-align: left;">0.1875</td>
+<td style="text-align: left;">6.11764705882353</td>
+<td style="text-align: left;">0.02</td>
+<td style="text-align: left;">2024:02:09 07:59:26.</td>
+<td style="text-align: left;">2024:02:09 07:59:26.</td>
+<td style="text-align: left;">109.6631615</td>
+<td style="text-align: left;">2024:02:09 20:00:00Z</td>
+<td style="text-align: left;">53.7378305555556</td>
+<td style="text-align: left;">-2.00918888888889</td>
+<td style="text-align: left;">0.00491140798741088</td>
+<td style="text-align: left;">69.3903656740024</td>
+<td style="text-align: left;">26</td>
+<td style="text-align: left;">53.7378305555556 -2.</td>
+<td style="text-align: left;">2.04314572276293</td>
+<td style="text-align: left;">6.33985000288463</td>
+<td style="text-align: left;">iPhone XS Max back d</td>
+<td style="text-align: left;">XMP Core 6.0.0</td>
+<td style="text-align: left;">16.3.1</td>
+<td style="text-align: left;">2024:02:09 07:59:26</td>
+<td style="text-align: left;">0.68385714285714294</td>
+<td style="text-align: left;">0.026190476190476208</td>
+<td style="text-align: left;">0.53928571428571437</td>
+<td style="text-align: left;">0.034571428571428586</td>
+<td style="text-align: left;">normalized</td>
+<td style="text-align: left;">Face</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">90</td>
+<td style="text-align: left;">80</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">3024</td>
+<td style="text-align: left;">4032</td>
+<td style="text-align: left;">pixel</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">media/photos/6.jpeg</td>
+<td style="text-align: left;">13.44</td>
+<td style="text-align: left;">6.jpeg</td>
+<td style="text-align: left;">media/photos</td>
+<td style="text-align: left;">108813</td>
+<td style="text-align: left;">2024:02:25 14:10:37+</td>
+<td style="text-align: left;">2026:02:12 14:53:45+</td>
+<td style="text-align: left;">2026:02:12 14:53:42+</td>
+<td style="text-align: left;">100644</td>
+<td style="text-align: left;">JPEG</td>
+<td style="text-align: left;">JPG</td>
+<td style="text-align: left;">image/jpeg</td>
+<td style="text-align: left;">1 1</td>
+<td style="text-align: left;">251</td>
+<td style="text-align: left;">13239 26702 40488 54</td>
+<td style="text-align: left;">MM</td>
+<td style="text-align: left;">Apple</td>
+<td style="text-align: left;">iPhone XS Max</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">16.3.1</td>
+<td style="text-align: left;">2024:02:09 08:04:39</td>
+<td style="text-align: left;">iPhone XS Max</td>
+<td style="text-align: left;">512</td>
+<td style="text-align: left;">512</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0.02040816327</td>
+<td style="text-align: left;">1.8</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">200</td>
+<td style="text-align: left;">0232</td>
+<td style="text-align: left;">2024:02:09 08:04:39</td>
+<td style="text-align: left;">2024:02:09 08:04:39</td>
+<td style="text-align: left;">1 2 3 0</td>
+<td style="text-align: left;">0.0205200000829189</td>
+<td style="text-align: left;">1.79999999993144</td>
+<td style="text-align: left;">1.789725209</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">4.25</td>
+<td style="text-align: left;">2013 1511 2217 1393</td>
+<td style="text-align: left;">14</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">177704726360250</td>
+<td style="text-align: left;">1000000000</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">170</td>
+<td style="text-align: left;">177</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">-0.08329442888 -0.80</td>
+<td style="text-align: left;">1.33984375 3.8007812</td>
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">13639680</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">1.568873048</td>
+<td style="text-align: left;">60 268435526</td>
+<td style="text-align: left;">33.80025099</td>
+<td style="text-align: left;">25F23E88-98E6-4CC7-A</td>
+<td style="text-align: left;">6560</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">67</td>
+<td style="text-align: left;">020</td>
+<td style="text-align: left;">020</td>
+<td style="text-align: left;">0100</td>
+<td style="text-align: left;">65535</td>
+<td style="text-align: left;">4032</td>
+<td style="text-align: left;">3024</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">26</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">4.25 6 1.8 2.4</td>
+<td style="text-align: left;">Apple</td>
+<td style="text-align: left;">iPhone XS Max back d</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">W</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">20:00:00</td>
+<td style="text-align: left;">K</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">T</td>
+<td style="text-align: left;">292.9943236</td>
+<td style="text-align: left;">T</td>
+<td style="text-align: left;">292.9943236</td>
+<td style="text-align: left;">2024:02:09</td>
+<td style="text-align: left;">55</td>
+<td style="text-align: left;">appl</td>
+<td style="text-align: left;">1024</td>
+<td style="text-align: left;">mntr</td>
+<td style="text-align: left;">RGB</td>
+<td style="text-align: left;">XYZ</td>
+<td style="text-align: left;">2022:01:01 00:00:00</td>
+<td style="text-align: left;">acsp</td>
+<td style="text-align: left;">APPL</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">APPL</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">0 0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0.9642 1 0.82491</td>
+<td style="text-align: left;">appl</td>
+<td style="text-align: left;">236 253 163 142 56 1</td>
+<td style="text-align: left;">Display P3</td>
+<td style="text-align: left;">Copyright Apple Inc.</td>
+<td style="text-align: left;">0.96419 1 0.82489</td>
+<td style="text-align: left;">0.51512 0.2412 -0.00</td>
+<td style="text-align: left;">0.29198 0.69225 0.04</td>
+<td style="text-align: left;">0.1571 0.06657 0.784</td>
+<td style="text-align: left;">base64:cGFyYQAAAAAAA</td>
+<td style="text-align: left;">1.04788 0.02292 -0.0</td>
+<td style="text-align: left;">base64:cGFyYQAAAAAAA</td>
+<td style="text-align: left;">base64:cGFyYQAAAAAAA</td>
+<td style="text-align: left;">375</td>
+<td style="text-align: left;">500</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">2 2</td>
+<td style="text-align: left;">177704.72636025</td>
+<td style="text-align: left;">1.8</td>
+<td style="text-align: left;">375 500</td>
+<td style="text-align: left;">0.1875</td>
+<td style="text-align: left;">6.11764705882353</td>
+<td style="text-align: left;">0.02040816327</td>
+<td style="text-align: left;">2024:02:09 08:04:39.</td>
+<td style="text-align: left;">2024:02:09 08:04:39.</td>
+<td style="text-align: left;">109.6561203</td>
+<td style="text-align: left;">2024:02:09 20:00:00Z</td>
+<td style="text-align: left;">53.7378055555556</td>
+<td style="text-align: left;">-2.00898055555556</td>
+<td style="text-align: left;">0.00491140798741088</td>
+<td style="text-align: left;">69.3903656740024</td>
+<td style="text-align: left;">26</td>
+<td style="text-align: left;">53.7378055555556 -2.</td>
+<td style="text-align: left;">2.04314572276293</td>
+<td style="text-align: left;">6.31070365689329</td>
+<td style="text-align: left;">iPhone XS Max back d</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-caption-table1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.1: Note: To make this table easier to read online I’ve clipped each cell to show a maximum of 20 characters for the top 5 rows of the dataframe.
+</figcaption>
+</figure>
+</div>
+<p>If you would like to download just a copy of this dataframe you can do this use <a href="media/all_exif_data.csv">this link</a></p>
+</section>
+<section id="sec-direct" class="level1">
+<h1>Direct Visulization</h1>
+<p>The first thing we can explore is using some of this EXIF data is to play around with <strong>direct visulization</strong> techniques, as we saw in the <a href="https://www.tandfonline.com/doi/abs/10.1080/1472586X.2011.548488">Lev Manovich</a> article.</p>
+<p>Since my photos are not (yet) connected to a bigger issue we are going to use the variable <code>GPSHPositioningError</code> and see how this changes across the pictures. We are going to start off simply and just use an <code>if</code> statement built into a loop. We are using the same loop we used to load in all our pictures above, and then plotting them with an opacity and a color, either blue or orange, laid over the top.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">10</span>),</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">49</span>){</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  picture <span class="ot">&lt;-</span> <span class="fu">image_read</span>(all_exif[n,]<span class="sc">$</span>SourceFile) <span class="co"># now we have the exif data we </span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># have changed this command use the 'SourceFile' variable from the dataframe</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  gps_error <span class="ot">&lt;-</span> all_exif[n,]<span class="sc">$</span>GPSHPositioningError <span class="co"># set the variable</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (gps_error <span class="sc">&lt;=</span> <span class="dv">500</span>){ </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(<span class="fu">image_colorize</span>(picture,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                        <span class="at">opacity =</span> <span class="dv">50</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>                        <span class="at">color =</span> <span class="st">'blue'</span>))</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (gps_error <span class="sc">&gt;=</span> <span class="dv">500</span>){</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(<span class="fu">image_colorize</span>(picture,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>                        <span class="at">opacity =</span> <span class="dv">50</span>,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>                        <span class="at">color =</span> <span class="st">'orange'</span>))</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We now have a direct data visulization! But or classification is quite simple. We can make this a little more interesting by using a <em>color spectrum</em>.</p>
+<p>We can use the <code>colorRampPalette</code> function to achieve this. Our palette is going to run from blue to orange again. To set our color ramp we are going to set it against the max value (using the <code>max()</code> function). In this case it will create a color ramp with 11,000 colors! But when we plot them altogether it will give us a nice smooth gradient that looks like this:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can then incorporate this into our loop (taking out the <code>if</code> statements) and setting the color of each photo by putting our <code>color_ramp</code> and <code>GPSHPositioningError</code> values together.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>colfunc <span class="ot">&lt;-</span> <span class="fu">colorRampPalette</span>(<span class="fu">c</span>(<span class="st">'blue'</span>, <span class="st">'orange'</span>))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>colour_ramp <span class="ot">&lt;-</span> <span class="fu">colfunc</span>(<span class="fu">max</span>(all_exif<span class="sc">$</span>GPSHPositioningError))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">10</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">49</span>){</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    picture_path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(all_exif[n,]<span class="sc">$</span>SourceFile)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  picture <span class="ot">&lt;-</span> <span class="fu">image_read</span>(picture_path)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  gps_error <span class="ot">&lt;-</span> all_exif[n,]<span class="sc">$</span>GPSHPositioningError</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="fu">image_colorize</span>(picture,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>                      <span class="at">opacity =</span> <span class="dv">50</span>,</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>                      <span class="at">color =</span> colour_ramp[gps_error]))</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Oh! this isn’t quite what we were expecting.</p>
+<p>It looks like we have one extreme value that is throwing off our nice color ramp. (For the keen eyed or frequent travelers its Wolverhampton station).</p>
+<p>We could do a quick bit of <em>Exploratory Data Analysis</em> to learn some more about the distribution of our values, for example with a box and whisker plot:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>To overcome this issue we can classify our variable according to a set of intervals. We have looked at variable splits in other classes, and there are lots of other ways of doing this (I am a big fan of <a href="https://www.rgs.org/about-us/what-is-geography/geovisualisation/data-visualisation-expert-on-what-s-wrong-with-the-uk-government-s-coronavirus-charts">this example</a>).</p>
+<p>To do this we are going to use the <code>classInt</code> library and the <code>cut()</code> function and assign the results to a new variable in our dataframe we are calling <code>error_cats</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(classInt)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>intervals <span class="ot">&lt;-</span> <span class="fu">classIntervals</span>(all_exif<span class="sc">$</span>GPSHPositioningError,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">n =</span> <span class="dv">5</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>all_exif<span class="sc">$</span>error_cats <span class="ot">&lt;-</span> <span class="fu">cut</span>(all_exif<span class="sc">$</span>GPSHPositioningError, </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">breaks =</span> intervals<span class="sc">$</span>brks,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                           <span class="at">include.lowest =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                           <span class="at">labels=</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>))</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>colfunc <span class="ot">&lt;-</span> <span class="fu">colorRampPalette</span>(<span class="fu">c</span>(<span class="st">'blue'</span>, <span class="st">'orange'</span>))</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>colour_ramp <span class="ot">&lt;-</span> <span class="fu">colfunc</span>(<span class="dv">5</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">10</span>),</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>))</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">49</span>){</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  picture_path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(all_exif[n,]<span class="sc">$</span>SourceFile)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  picture <span class="ot">&lt;-</span> <span class="fu">image_read</span>(picture_path)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="fu">image_colorize</span>(picture,</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>                      <span class="at">opacity =</span> <span class="dv">50</span>,</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>                      <span class="at">color =</span> colour_ramp[all_exif[n,]<span class="sc">$</span>error_cats])</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>       )</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Finally, we could change the order in which we are plotting our data. We can use the <code>order()</code> function to do this. Since we are using a loop, however, we do not need to re-order our data, we can simply create vector that loops through our pictures in an order defined by the <code>GPSHPositioningError</code> rank.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We can use the order function to do this for us </span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>gps_error_order <span class="ot">&lt;-</span><span class="fu">rownames</span>(all_exif[<span class="fu">order</span>(all_exif<span class="sc">$</span>GPSHPositioningError),])</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">10</span>),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(n <span class="cf">in</span> gps_error_order){ <span class="co"># changing the order</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  picture_path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(all_exif[n,]<span class="sc">$</span>SourceFile)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  picture <span class="ot">&lt;-</span> <span class="fu">image_read</span>(picture_path)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="fu">image_colorize</span>(picture,</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>                      <span class="at">opacity =</span> <span class="dv">50</span>,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>                      <span class="at">color =</span> colour_ramp[all_exif[n,]<span class="sc">$</span>error_cats])</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-gps" class="level1">
+<h1>GPS Data</h1>
+<p>Our EXIF metadata data also includes GPS data. In its simplest form, GPS data is just a set of coordinates, one x and one y this means we don’t even need a maps package to plot it. We can send these coordinates straight to the plot function to see what they look like.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(all_exif<span class="sc">$</span>GPSLongitude, all_exif<span class="sc">$</span>GPSLatitude,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch=</span><span class="dv">19</span>, <span class="at">cex=</span><span class="dv">1</span>, <span class="at">col=</span><span class="st">"red"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>While this is easy to plot, its not very decipherable. To make my journey a little easier to understand we can turn this into a line plot and include a sequence of numbers alongside.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>colfunc <span class="ot">&lt;-</span> <span class="fu">colorRampPalette</span>(<span class="fu">c</span>(<span class="st">'blue'</span>, <span class="st">'orange'</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>colour_ramp <span class="ot">&lt;-</span> <span class="fu">colfunc</span>(<span class="dv">49</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(all_exif<span class="sc">$</span>GPSLongitude, all_exif<span class="sc">$</span>GPSLatitude,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="st">'grey'</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(all_exif<span class="sc">$</span>GPSLongitude, all_exif<span class="sc">$</span>GPSLatitude,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">labels =</span> <span class="fu">row</span>(all_exif)[,<span class="dv">1</span>],</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> colour_ramp[<span class="fu">row</span>(all_exif)[,<span class="dv">1</span>]])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Still not great, but it makes a little more sense. Lets bring this altogether and plot our images and our graph side by side. This next section gets a little complicated in how we are setting out our canvas in R, so don’t be overwhelmed if it doesn’t make immediate sense! (This may be very helpful to come back to later depending on what software you want to use to approach this project).</p>
+<p><em>We can use <code>par(omd=)</code> to set up a par window within our canvas we can then call <code>par()</code> again to set out our 5x10 picture grid.</em></p>
+<p><em>Using the other side of the canvas is a little more complicated. We need to use <code>par(omd=)</code> to specify the other side of the canvas. Then set out the number of rows again using <code>par(mfrow=)</code>, in this case we just want 1 plot. Finally we have to use <code>par(mfg=)</code> so that our canvas does not reset when we call plot again.</em></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">omd=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.5</span>,<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">10</span>),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">49</span>){</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  picture_path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(all_exif[n,]<span class="sc">$</span>SourceFile)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  picture <span class="ot">&lt;-</span> <span class="fu">image_read</span>(picture_path)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(picture)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">text</span>(<span class="dv">200</span>,<span class="dv">250</span>, <span class="co"># lets add in text to show the order of the pictures</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">labels =</span> n,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex=</span> <span class="dv">3</span>,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> colour_ramp[<span class="fu">row</span>(all_exif)[,<span class="dv">1</span>]]) <span class="co"># and add in the color data</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">omd=</span><span class="fu">c</span>(<span class="fl">0.5</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">mfg=</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(all_exif<span class="sc">$</span>GPSLongitude, all_exif<span class="sc">$</span>GPSLatitude,</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch=</span><span class="dv">19</span>, <span class="at">cex=</span><span class="dv">1</span>,</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> colour_ramp[all_exif<span class="sc">$</span>error_cats],</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">axes =</span> F</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(all_exif<span class="sc">$</span>GPSLongitude, all_exif<span class="sc">$</span>GPSLatitude,</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="st">'grey'</span>,</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(all_exif<span class="sc">$</span>GPSLongitude, all_exif<span class="sc">$</span>GPSLatitude,</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>     <span class="at">labels =</span> <span class="fu">row</span>(all_exif)[,<span class="dv">1</span>],</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> colour_ramp[all_exif<span class="sc">$</span>error_cats],</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">3</span>,</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>     <span class="at">offset =</span> <span class="fl">0.3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>So far we have worked with our spatial data by simply reading our GPS coordinates into R just as they are. However this doesn’t look quite right as the points are stretched out and our axis are scaled according the the minimum and maximum values in our data rather than the fixed grid of longitude and latitude. We could fix this by playing around with the scale of our axis. However, the easier way to address this issue is by treating our GPS metadata as <strong>spatial data</strong>.</p>
+<p>To work with this data as proper ‘spatial data’ we need to read it with a library that treats space in a more complex way. To do this we are going to us the <code>sf</code> library.</p>
+<p>To start with we are going to read in a <code>shapefile</code> of the UK local authorities. We can then use this as an example that we can match up to our photo data.</p>
+<div id="fig-caption-space1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-caption-space1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>la_data <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">'media/Local_authorites/LAD_DEC_2023_UK_BUC.shp'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `LAD_DEC_2023_UK_BUC' from data source 
+  `/Users/u2272744/Dropbox/30 - 39 - Personal Teaching/32 - Data Visualization/32.IM942.2526 - Adv Viz/32.IM942.2526 - Adv Viz - Week 5 - Class/IMAGES_AS_DATA/media/local_authorites/LAD_DEC_2023_UK_BUC.shp' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 361 features and 8 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -116.1928 ymin: 7054.1 xmax: 655653.8 ymax: 1220310
+Projected CRS: OSGB36 / British National Grid</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">omd=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(la_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-caption-space1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.1: If you are curious about administrative boundaries, what these variable names mean, and how to work with spatial data in detail we will be exploring this further in project 3.
+</figcaption>
+</figure>
+</div>
+<p>Now we can convert our EXIF data into a a spatial data format. The <code>sf</code> package provides easy tools to do this with. But first lets make a subset of this data as we don’t need all of the variables from the EXIF data file.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>all_exif_sf <span class="ot">&lt;-</span> all_exif[, <span class="fu">c</span>(<span class="st">"SourceFile"</span>, <span class="st">"GPSLongitude"</span>, <span class="st">"GPSLatitude"</span>)]</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># And then convert this into a 'spatial' data.frame</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>all_exif_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(all_exif_sf,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">coords=</span><span class="fu">c</span>(<span class="st">"GPSLongitude"</span>, <span class="st">"GPSLatitude"</span>),</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">crs=</span><span class="fu">st_crs</span>(<span class="dv">4326</span>)) <span class="co"># I will explain this number soon!</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(all_exif_sf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Notice how, now we have converted our data into a spatial dataframe, that the points are not as stretched as when we were plotting them as simple x, y points? This is because base R was adjusting the x axis to fit the min and max of our data. However, as a spatial data format, <code>sf</code> tells R not to do this as it would distort the map!</p>
+<p>Now lets plot the two files together to make sure everything is matching up.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(la_data<span class="sc">$</span>geometry)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(all_exif<span class="sc">$</span>GPSLongitude, all_exif<span class="sc">$</span>GPSLatitude, <span class="at">col =</span> <span class="st">'red'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Wait, this doesn’t look right. All our points are the red ciricles out in the ocean, and we can tell from looking at the photographs themselves that this was not where they were taken!</p>
+<p>So what has gone wrong? In this case, there is nothing wrong with the data but there is something off with the format in which the data is being read. When working with geographic data all the underlying points are encoded based on ‘projections’ of the earth. This is how points from a 3D sphere of our planet are translated into the 2D plane we use for making maps.</p>
+<p>In this case each dataset has a different projection, encoded as the ‘crs’ or ‘coordinate reference system’. The UK data is based on the ‘OSGB36 / British National Grid’ which is used for all official data in the UK. (so created so that when you look at a UK map all the longitude and latitude grid lines are straight rather than being slightly curved). Whereas our the data from my phone is encoded as by the standard global GPS crs known as WGS84.</p>
+<p>We can align these two projections using st_transform. The number 4326 specifies the WGS84 system.</p>
+<div id="fig-caption-space2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-caption-space2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>la_data <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(la_data, <span class="at">crs=</span><span class="dv">4326</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(la_data<span class="sc">$</span>geometry)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(all_exif<span class="sc">$</span>GPSLongitude, all_exif<span class="sc">$</span>GPSLatitude, <span class="at">col =</span> <span class="st">'red'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-caption-space2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.2: Notice how the shape of the UK subtlety changes and our points now line up!
+</figcaption>
+</figure>
+</div>
+<p>With our spatial data now matching up correctly we bring the two datasets together by looking at where the data matches.Our GPS coordinates are not only good for plotting where our pictures were taken, but for linking up our photographs to other datasets. We can do this through an operation called points-in-polygons. Essentially we locate where our photos are in the shapes data or ‘polygons’ in the local authorities dataset we have just been ploting.</p>
+<p>We can find where our points fit within these shapes using the <code>st_intersections()</code> function.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>matching_points <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(la_data, all_exif_sf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 24%">
+<col style="width: 13%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">LAD23CD</th>
+<th style="text-align: left;">LAD23NM</th>
+<th style="text-align: left;">LAD23NMW</th>
+<th style="text-align: right;">BNG_E</th>
+<th style="text-align: right;">BNG_N</th>
+<th style="text-align: right;">LONG</th>
+<th style="text-align: right;">LAT</th>
+<th style="text-align: left;">GlobalID</th>
+<th style="text-align: left;">SourceFile</th>
+<th style="text-align: left;">geometry</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">259</td>
+<td style="text-align: left;">E08000033</td>
+<td style="text-align: left;">Calderdale</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">402618</td>
+<td style="text-align: right;">424895</td>
+<td style="text-align: right;">-1.9618</td>
+<td style="text-align: right;">53.7205</td>
+<td style="text-align: left;">af25e83c-93ad-4a81-bff4-6d5568a7aa4d</td>
+<td style="text-align: left;">media/photos/1.jpeg</td>
+<td style="text-align: left;">POINT (-2.016256 53.74164)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">259.1</td>
+<td style="text-align: left;">E08000033</td>
+<td style="text-align: left;">Calderdale</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">402618</td>
+<td style="text-align: right;">424895</td>
+<td style="text-align: right;">-1.9618</td>
+<td style="text-align: right;">53.7205</td>
+<td style="text-align: left;">af25e83c-93ad-4a81-bff4-6d5568a7aa4d</td>
+<td style="text-align: left;">media/photos/2.jpeg</td>
+<td style="text-align: left;">POINT (-2.014094 53.74051)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">259.2</td>
+<td style="text-align: left;">E08000033</td>
+<td style="text-align: left;">Calderdale</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">402618</td>
+<td style="text-align: right;">424895</td>
+<td style="text-align: right;">-1.9618</td>
+<td style="text-align: right;">53.7205</td>
+<td style="text-align: left;">af25e83c-93ad-4a81-bff4-6d5568a7aa4d</td>
+<td style="text-align: left;">media/photos/3.jpeg</td>
+<td style="text-align: left;">POINT (-2.008831 53.73789)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">259.3</td>
+<td style="text-align: left;">E08000033</td>
+<td style="text-align: left;">Calderdale</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">402618</td>
+<td style="text-align: right;">424895</td>
+<td style="text-align: right;">-1.9618</td>
+<td style="text-align: right;">53.7205</td>
+<td style="text-align: left;">af25e83c-93ad-4a81-bff4-6d5568a7aa4d</td>
+<td style="text-align: left;">media/photos/4.jpeg</td>
+<td style="text-align: left;">POINT (-2.009114 53.73793)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">259.4</td>
+<td style="text-align: left;">E08000033</td>
+<td style="text-align: left;">Calderdale</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">402618</td>
+<td style="text-align: right;">424895</td>
+<td style="text-align: right;">-1.9618</td>
+<td style="text-align: right;">53.7205</td>
+<td style="text-align: left;">af25e83c-93ad-4a81-bff4-6d5568a7aa4d</td>
+<td style="text-align: left;">media/photos/5.jpeg</td>
+<td style="text-align: left;">POINT (-2.009189 53.73783)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">259.5</td>
+<td style="text-align: left;">E08000033</td>
+<td style="text-align: left;">Calderdale</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">402618</td>
+<td style="text-align: right;">424895</td>
+<td style="text-align: right;">-1.9618</td>
+<td style="text-align: right;">53.7205</td>
+<td style="text-align: left;">af25e83c-93ad-4a81-bff4-6d5568a7aa4d</td>
+<td style="text-align: left;">media/photos/6.jpeg</td>
+<td style="text-align: left;">POINT (-2.008981 53.73781)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Using the the same loop as we did for the examples above we can now bring these two datasets together and write in the local authority names where each photograph was taken.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">10</span>), <span class="co"># set our canvas to plot with 5 rows and 10 columns</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)) <span class="co"># set no margins around our plots</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">49</span>){</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  picture_path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(all_exif[n,]<span class="sc">$</span>SourceFile)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  picture <span class="ot">&lt;-</span> <span class="fu">image_read</span>(picture_path)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(picture)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">text</span>(<span class="dv">200</span>,<span class="dv">250</span>, <span class="co"># lets add in text to show the Local Authority</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">labels =</span> matching_points[n,]<span class="sc">$</span>LAD23NM, <span class="co"># labeling</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">cex=</span> <span class="dv">1</span>,</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>   <span class="at">col =</span> <span class="st">'red'</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-time" class="level1">
+<h1>Time Data</h1>
+<p>One of the attributes attached to our photos is time. Time can be very useful for representing all sorts of things about our data! However, time needs to be stored in R as a specific type of value. This example walks through the very basics of working with time and showing how to convert strings into a time format.</p>
+<p>We can check the type of how or data is stored with <code>typeof()</code> function.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(all_exif<span class="sc">$</span>DateTimeOriginal)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+<p>As a character field our time data is currently seen by R as string of letters and numbers while this can be of use for double checking things, it means we cannot plot, add, subtract or visualise this data.</p>
+<p>We can convert this strings into date formats, known in R as <code>DateTimeClasses</code> with <code>strptime()</code> function. However, we need to specify what the function is looking for. For looking at our data we can see that dates are beings stored as:</p>
+<p><code>"2024:02:09 11:58:45"</code></p>
+<p>We can then use special characters, which we specify with %, to tell R what and where our times are:</p>
+<ul>
+<li>%Y stands for year</li>
+<li>%m for month</li>
+<li>%d for day</li>
+<li>%H for hour</li>
+<li>%M for minutes</li>
+<li>%S for seconds</li>
+</ul>
+<p>There are many potential options here which you can find out with the <code>?strptime</code> command.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>all_exif<span class="sc">$</span>time_formated <span class="ot">&lt;-</span> <span class="fu">strptime</span>(all_exif<span class="sc">$</span>DateTimeOriginal, <span class="st">"%Y:%m:%d %H:%M:%S"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Now that R can read time as <code>DateTimeClasses</code> we can do mathematical operations on time just as we would with numbers.</p>
+<p>For example we can calculate my total journey time from the first picture to the last.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>time_total <span class="ot">&lt;-</span> <span class="fu">max</span>(all_exif<span class="sc">$</span>time_formated) <span class="sc">-</span> <span class="fu">min</span>(all_exif<span class="sc">$</span>time_formated)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>time_total</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Time difference of 4.344444 hours</code></pre>
+</div>
+</div>
+<p>As our time data is now in the right format, we can now visualize it. To create sample data I tried to take a picture every 5 minutes, lets see how successful I was …</p>
+<p>The code below is an easy way to accomplish this, but it isn’t the ‘best’ or most ‘efficient’ code. Trying to write ‘perfect’ code can often gets in the way of what we trying to archive. The main question we should ask ourselves when we are coding is does this help us accomplish our task?</p>
+<p>As with all code, there are multiple different ways we can achieve the same result. With the below code, I’ve tried to make things as easy to follow as possible by reusing the loop we used to read in the EXIF data and not load any external libraries for other functions that we could use to achieve the same result. For our purposes today a loop is sufficient and can be an an easy way to get the results we are after.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lets create a blank data frame, as we loop through our data we will add each</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># new row to the bottom of the data frame</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>time_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># we are also going to start from our second value </span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">49</span>){</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  time_dif <span class="ot">&lt;-</span> <span class="fu">difftime</span>(all_exif[n,]<span class="sc">$</span>time_formated,</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>                       all_exif[n <span class="sc">-</span> <span class="dv">1</span>,]<span class="sc">$</span>time_formated, <span class="co">#and then to get the</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">units =</span> <span class="st">'secs'</span>) <span class="co"># difference we use n - 1 to select the </span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>                                       <span class="co"># previous value</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  time_dif <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(time_dif) <span class="co"># then have our time in seconds</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># then turn our results into a single row data.frame</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  temp_time_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">'SourceFile'</span> <span class="ot">=</span> all_exif[n,]<span class="sc">$</span>SourceFile, </span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>                               <span class="st">'time_between'</span> <span class="ot">=</span> time_dif)</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>                                </span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add add this to our time_data data.frame </span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>  time_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(time_data, temp_time_data)</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a><span class="co"># and finally, see how far off I was from the 5 minute mark</span></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>time_data<span class="sc">$</span>five <span class="ot">&lt;-</span> time_data<span class="sc">$</span>time_between <span class="sc">-</span> <span class="dv">300</span></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a><span class="co"># A simple plot</span></span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(time_data<span class="sc">$</span>five, <span class="at">type=</span><span class="st">'h'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-color" class="level1">
+<h1>Color Data</h1>
+<p>So far we have worked with our pictures by extracting the EXIF data and overlaying information on top or plotting it separately. But the images themselves are made up of data. For this next example we are going to extract color data from our images and plot this on its own, giving us a more abstract representation of our pictures</p>
+<p>To do this we are going to use the package <code>RImagePalette</code>. There are several packages that can do operations like this, but this one is fast and simple to use so works well for this task. Other packages, can work with extracting color in different more specific ways from images so are worth looking up if you are interested!</p>
+<p>We are also going to load in our images in a different way using the <code>JPEG</code> library. As it represent our image as a matrix of its underlying data. This means that the RImagePalette can directly perform operations on the underlying data.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RImagePalette)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(baselines) </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>jpeg_example <span class="ot">&lt;-</span> jpeg<span class="sc">::</span><span class="fu">readJPEG</span>(<span class="fu">paste0</span>(all_exif[<span class="dv">1</span>,]<span class="sc">$</span>SourceFile))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We can then use the <code>image_palette()</code> function to pick out the nine most dominant colors from our example picture in a 3x3 grid.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>col_pal <span class="ot">&lt;-</span> <span class="fu">image_palette</span>(jpeg_example, <span class="at">n=</span><span class="dv">9</span>) </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>),</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>))</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (c <span class="cf">in</span> col_pal){</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_blank</span>()</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_background</span>(<span class="at">col=</span>c)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now lets scale this up to all of our pictures. I’m going to pick 5 colors and plot them sequentially so we need 5*49 cols. We are a also going to keep a running list of all the colors we generate during this loop for another visualization in the <code>col_pal_all</code> vector.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I'm going to pick 5 colors and plot them sequentially so we need 5*49 cols</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">245</span>),</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>))</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co"># We are a also going to keep a running list of all the colors we generate</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co"># during this loop for another visualization </span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>col_pal_all <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">49</span>){</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  picture_path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(all_exif[n,]<span class="sc">$</span>SourceFile)</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  picture <span class="ot">&lt;-</span> jpeg<span class="sc">::</span><span class="fu">readJPEG</span>(picture_path)</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  col_pal <span class="ot">&lt;-</span> <span class="fu">image_palette</span>(picture, <span class="at">n=</span><span class="dv">5</span>)</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (c <span class="cf">in</span> col_pal){</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot_blank</span>()</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot_background</span>(<span class="at">col=</span>c)</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>  col_pal_all <span class="ot">&lt;-</span> <span class="fu">append</span>(col_pal_all, col_pal)</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>With the all our colors in the single vector <code>col_pal_all</code> we can sort them into an order to make a different visulization. However, sorting colors is a non-trivial problem, which <a href="https://www.alanzucconi.com/2015/09/30/colour-sorting/">this blog post</a> dives into. To avoid this complexity we are going to use the <code>lterpalettefinder</code> library which has a color sorter function we can use for now.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lterpalettefinder)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>col_pal_sorted <span class="ot">&lt;-</span> <span class="fu">palette_sort</span>(col_pal_all)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">245</span>),</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>))</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (c <span class="cf">in</span> col_pal_sorted){</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_blank</span>()</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_background</span>(<span class="at">col=</span>c)</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-ocr" class="level1">
+<h1>OCR</h1>
+<p>Finally, we can extract data of what is contained in the images themselves, for example all of the text. To do this we are going to use a form of machine learning called OCR, or <strong>Optical Character Recognition</strong>.</p>
+<p>To do this we are going use the google <code>tesseract</code> library.</p>
+<div id="fig-caption-ocr1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-caption-ocr1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tesseract)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># setting the language</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tesseract</span>(<span class="at">language =</span> <span class="st">"eng"</span>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>text_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Unlike all our other loops for this task we need higher resolution images</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co"># so we are loading in our pictures from a different directory</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a> <span class="cf">for</span>(n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">49</span>){</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>   picture_path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">'media/og_photos/'</span>, n, <span class="st">'.jpeg'</span>)</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>   picture <span class="ot">&lt;-</span> <span class="fu">image_read</span>(picture_path)</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>   picture_text <span class="ot">&lt;-</span> <span class="fu">image_ocr_data</span>(picture)</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>   picture_text<span class="sc">$</span>source <span class="ot">&lt;-</span> all_exif[n,]<span class="sc">$</span>SourceFile</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>   text_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(text_data, picture_text)</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a> }</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-caption-ocr1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.1: Note this step requires higher resolution images which you need to download from the class Teams channel.
+</figcaption>
+</figure>
+</div>
+<p>Looking at the text data that has been extracted from the text we can see that lots of it is unusable!</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">…1</th>
+<th style="text-align: left;">word</th>
+<th style="text-align: right;">confidence</th>
+<th style="text-align: left;">bbox</th>
+<th style="text-align: left;">source</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">i</td>
+<td style="text-align: right;">50.11905</td>
+<td style="text-align: left;">2590,0,2613,89</td>
+<td style="text-align: left;">media/photos/1.jpeg</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">!</td>
+<td style="text-align: right;">35.61607</td>
+<td style="text-align: left;">2655,8,2676,75</td>
+<td style="text-align: left;">media/photos/1.jpeg</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">“Vb</td>
+<td style="text-align: right;">64.10910</td>
+<td style="text-align: left;">2745,0,2814,41</td>
+<td style="text-align: left;">media/photos/1.jpeg</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">J</td>
+<td style="text-align: right;">95.34794</td>
+<td style="text-align: left;">2892,0,2930,98</td>
+<td style="text-align: left;">media/photos/1.jpeg</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: right;">25.13509</td>
+<td style="text-align: left;">2949,0,2995,43</td>
+<td style="text-align: left;">media/photos/1.jpeg</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">oe</td>
+<td style="text-align: right;">40.92468</td>
+<td style="text-align: left;">2446,99,2500,116</td>
+<td style="text-align: left;">media/photos/1.jpeg</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>To address this issue over this we are going to filter out everything with a confidence level below 90:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>ninty_plus <span class="ot">&lt;-</span> text_data[<span class="fu">which</span>(text_data<span class="sc">$</span>confidence <span class="sc">&gt;</span> <span class="dv">90</span>, any),]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">…1</th>
+<th style="text-align: left;">word</th>
+<th style="text-align: right;">confidence</th>
+<th style="text-align: left;">bbox</th>
+<th style="text-align: left;">source</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">J</td>
+<td style="text-align: right;">95.34794</td>
+<td style="text-align: left;">2892,0,2930,98</td>
+<td style="text-align: left;">media/photos/1.jpeg</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">29</td>
+<td style="text-align: left;">|</td>
+<td style="text-align: right;">90.71518</td>
+<td style="text-align: left;">1867,1123,1877,1260</td>
+<td style="text-align: left;">media/photos/1.jpeg</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">83</td>
+<td style="text-align: left;">|</td>
+<td style="text-align: right;">90.63419</td>
+<td style="text-align: left;">1234,1856,1237,1891</td>
+<td style="text-align: left;">media/photos/1.jpeg</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">133</td>
+<td style="text-align: left;">|</td>
+<td style="text-align: right;">90.00334</td>
+<td style="text-align: left;">654,2151,658,2174</td>
+<td style="text-align: left;">media/photos/1.jpeg</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">134</td>
+<td style="text-align: left;">|</td>
+<td style="text-align: right;">90.47010</td>
+<td style="text-align: left;">791,2088,798,2192</td>
+<td style="text-align: left;">media/photos/1.jpeg</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">161</td>
+<td style="text-align: left;">=</td>
+<td style="text-align: right;">92.46490</td>
+<td style="text-align: left;">2321,2254,2347,2258</td>
+<td style="text-align: left;">media/photos/1.jpeg</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>This is looking better, but there is still lots of useless data so we are only going to keep ‘words’ with more than 1 character.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>ninty_plus_words <span class="ot">&lt;-</span> ninty_plus[<span class="fu">which</span>(<span class="fu">nchar</span>(ninty_plus<span class="sc">$</span>word) <span class="sc">&gt;</span> <span class="dv">1</span>, any),]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 29%">
+<col style="width: 29%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">…1</th>
+<th style="text-align: left;">word</th>
+<th style="text-align: right;">confidence</th>
+<th style="text-align: left;">bbox</th>
+<th style="text-align: left;">source</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">2274</td>
+<td style="text-align: left;">SS</td>
+<td style="text-align: right;">90.11664</td>
+<td style="text-align: left;">1084,1280,1155,1323</td>
+<td style="text-align: left;">media/photos/5.jpeg</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2357</td>
+<td style="text-align: left;">PASSENCERS</td>
+<td style="text-align: right;">91.67908</td>
+<td style="text-align: left;">938,1690,1108,1719</td>
+<td style="text-align: left;">media/photos/5.jpeg</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2358</td>
+<td style="text-align: left;">MUST</td>
+<td style="text-align: right;">96.32262</td>
+<td style="text-align: left;">1124,1697,1193,1713</td>
+<td style="text-align: left;">media/photos/5.jpeg</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2359</td>
+<td style="text-align: left;">NOT</td>
+<td style="text-align: right;">96.32262</td>
+<td style="text-align: left;">1209,1701,1255,1715</td>
+<td style="text-align: left;">media/photos/5.jpeg</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2373</td>
+<td style="text-align: left;">CROSS</td>
+<td style="text-align: right;">96.32278</td>
+<td style="text-align: left;">898,1719,987,1751</td>
+<td style="text-align: left;">media/photos/5.jpeg</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2374</td>
+<td style="text-align: left;">THE</td>
+<td style="text-align: right;">96.39224</td>
+<td style="text-align: left;">1005,1723,1057,1737</td>
+<td style="text-align: left;">media/photos/5.jpeg</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Now that we have our words we extracted from our images we can create a data visualization from them. As both a bit of <em>EDA</em> and an straightforward bit of code, I’m going to make a wordcloud.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wordcloud2)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># all we have to do is count up how many times each word occurs </span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>wordcloud_data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">table</span>(ninty_plus_words[,<span class="fu">c</span>(<span class="st">"word"</span>)] ))</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co"># voila! </span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="fu">wordcloud2</span>(wordcloud_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="wordcloud2 html-widget html-fill-item" id="htmlwidget-1820d935fe2ba652f6d7" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-1820d935fe2ba652f6d7">{"x":{"word":["-6","(Beta)","(Wagner,","\\\\","#3","=,","==","||","02","10:12","19th","2000).","2024","2400","37","46","A.","achievement","actions","active","activists","actors","Adobe","against","an","and","argued","argument","articulating","articulation","Articulation,","arts","as","assembly,","assumption.","at","autonomy","basipterygoid","been","before","between","Birmingham","Brock","Buses","but","by","BY","call","case","causalist","ce","centre","century","challenge","comes","command","COMP","constrictor","course,","CROSS","D.","Design","developed","Devonian","different","DISPOSA","distinctive","dorsalis","Drink","Early","economy","EDGELEY","editable","either","Enhanced","eternally","expected","explanation","explanation,","F10","F3","family:","features","February","fi","First","fit","fonts","Fonts","Food","form","forms","formulate","foundational","founding","from","fundamentally","graphic","Graphic","had","has","have","homology","https://doi.org/10.1111/1468-4446.13084","idea.","ideas,","identifying","igi","in","inclusion","Information","into","INTRODUCTION","is","issue","it","It","Jacquet,","James","Johnston","JUNCTION","justify","Key","knowledge,","laws,","limitations","LINE","Local","long","Lower","M.","machaeridians","make","marked","Marres","matched","may","ME","means","Metrolink","MHRA","MOCHA","musculature","MUST","natural","nature","nature.","new","New","nformation","Noortje","norms","NOT","number","obey","of","Of","one","Online","Ontogeny","option","or","other","outlined","Palaeontology","Pantodon","Papers","PASSENCERS","persistent","Peter","phenomenon","Platforms","play","problem","protective","published:","quickly","raster","reality","reality.","realm","Recommended","Record","References","reflexivity.","rejecting","Related","relative","Retype","role","ROR","rules","Sarah","scholars","sciences","Scientists","Sclerite","Selly,","sense","serious","service","SHOP","similar","Smoothing","social","Social","society","Society,","society.","sociologists","Sociologists","Sphenodon","SS","Stafford","state,","static","Station","Street","SUBWAY","succeeded","system","Tara","Taxis","text","Text","text,","that","the","The","THE","their","themselves","this","This","ti","time","to","today","TPD","transformation","understanding","valid","Vector","Version","View","warwick","was","we","Welcome","when","with","words,"],"freq":[1,2,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,8,1,1,1,3,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,3,2,1,1,1,2,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,1,1,1,1,2,1,1,1,1,1,1,1,8,1,1,1,1,5,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,12,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,2,1,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,7,11,2,3,2,1,1,1,1,1,7,1,2,1,1,1,1,1,1,1,2,1,1,1,2,1],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":15,"backgroundColor":"white","gridSize":0,"minRotation":-0.7853981633974483,"maxRotation":0.7853981633974483,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
+</div>
+</div>
+</section>
+<section id="sec-task" class="level1">
+<h1>Class Challange!</h1>
+<p>I created this dataset without a motivation of linking the data I collected to a larger issue.However, we could think about some ways in which this could be made to link the personal and political. To trial this out I have linked the data we have just worked with to some external datasets.</p>
+<p><strong>As a challenge for this class I would like you to <a href="media/class_data.csv">download this csv</a> and see what data visulizations you can produce?</strong></p>
+<p>I have included 5 new variables linked via the location each picture was taken. These are:</p>
+<ul>
+<li>Average house price.</li>
+<li>Average time it takes to walk to a hospital.</li>
+<li><a href="https://deprivation.communities.gov.uk/maps?type=imd&amp;geog=lsoa#5.51/52.283/-6.439">Index of Multiple Deprivation</a> by rank and decile.</li>
+<li>Urban/rural classification.</li>
+</ul>
+<p>Work with the data however you want!</p>
+<p>You can download the <a href="media/all_exif_data.csv">.csv of all the EXIF data here</a> or <a href="media/photos.zip">a copu of all the photographs here</a>.</p>
+<p>Please also feel free to merge in add, mash-up, or play around with any of the data!</p>
+<p><strong>As ever please ask us questions!</strong></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://warwick.ac.uk/cim">
+<p><img src="./media/CIM_logo_white.png" class="img-fluid" width="300"></p>
+</a>
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/WarwickCIM/">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://fediscience.org/%40cimethods">
+      <i class="bi bi-mastodon" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://bsky.app/profile/cimethods.bsky.social">
+      <i class="bi bi-bluesky" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
