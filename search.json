@@ -1,0 +1,72 @@
+[
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Notes & Writing",
+    "section": "",
+    "text": "Highlights in Quarto\n\n\n\n\n\n\n\n\nMar 6, 2026\n\n\n\n\n\n\n\nChanging fonts in Quarto\n\n\n\n\n\n\n\n\nMar 5, 2026\n\n\n\n\n\n\n\nLine spacing in Emacs by making a new font\n\n\n\n\n\n\n\n\nJan 31, 2026\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "colophon.html",
+    "href": "colophon.html",
+    "title": "\ncolophon\n",
+    "section": "",
+    "text": "colophon\n\n\\\nInspired by Jonathan W. Y. Gray this is a colophon page to detail some of what this website does and why.\n\\\nThis website is made using Quarto an ‘open-source scientific and technical publishing system’.\nI like Quarto as it can be used to write slides, websites and books! If you are an academic once you get the hang of it it can fit easily into many of your work flows.\n\\\nTo make this website look how it does I have customized the base Quarto site layout quite significantly - and this remains a work in progress as I keep on tinkering.\nI am using fonts I have chosen - FairfaxHD and Pilowlava - using the built in custom.scss. I also have a custom class to make highlights\n\\\nAs this is a static website it has no cookies and does not collect or store any data about who is visiting it."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "\nAbout me\n",
+    "section": "",
+    "text": "About me\n\n\\\n\n\n\n\n\n\\\nI have a PhD in Sociology from the LSE where my research looked at the information infrastructure of land registration in England and Wales and ‘offshore’ property ownership.\n\\\nBefore this I studied for a MPhil in Modern Soceity and Global Transformation at Cambridge University and BA in International Relations and Security Studies at the Univerity of Bradford.\n\\\nAfter completing my PhD I moved onto Oxford University where I worked as a Research Associate in Finance and Geography as part of the CityNet Team.\n\\\nPrior to starting at Warwick I was an Associate Lecturer in Geography and Data Visualisation at UCL where I taught Cartography and Data Visualisation to undergraduate and masters students. While teaching at UCL I also worked as CIVICA Open Social Science Researcher at the LSE.\n\\\nI am currenlty working on the ESRC funded project ‘Can Digital Goods be Neutral? Evaluating OpenStreetMap’s equity through participatory data visualisation’ with Dr Carlos Cámara-Menoyo.\n\\\nYou can find out more about my publications here"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "\nWelcome\n",
+    "section": "",
+    "text": "Welcome\n\n\\ I am an Assistant Professor in the Centre for Interdisciplinary Methods at the University of Warwick. I teach on the Data Visulization MASc as well as several other course at CIM and Warwick.\n\\\nI am a co-author of the Atlas of Finance and on the forthcoming book Doing Open Social Science: A Handbook for Researchers, along with other academic publications\n\\\nI update this website sporadically with blog posts, tutorials and other tidbits. You can also follow me on Mastodon, bluesky or LinkedIn.\n\\\nYou can find more out about me here.\n\\\n\nLatest Notes\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHighlights in Quarto\n\n\n\n\nChanging fonts in Quarto\n\n\n\n\nLine spacing in Emacs by making a new font\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/blog_posts/Quarto_highlights.html",
+    "href": "posts/blog_posts/Quarto_highlights.html",
+    "title": "Highlights in Quarto",
+    "section": "",
+    "text": "I am a big fan of highlighting bits of text. Particularly in presentations where I slides with long quotes on them.\nUnfortunately Quarto does not have a native function to be able to do this. However by playing around with the custom.scss file we can add this in ourselves.\nFirst we want to set the varibles for the colors we are using throughout our website/slides/book etc. This needs to go in the /*-- scss:defaults --*/ section at the top of the custom.scss file. `\n/*-- scss:defaults --*/\n$theme-background: #FEF2CA;\n$theme-text: #0C0C0C;\nThen in the /*-- scss:rules --*/ section we set a custom class for highlights. What we are doing here is swapping around the the text and background color.\n/*-- scss:rules --*/\n\n.highlight-contrast{\n  background-color: $theme-black;\n  color: $theme-text;\n}\nAnd that’s it!\nAll we have to do is call this around any text we want highlighted. Like this:\n[Text to highlight]{.highlight-contrast}\nAnd it will be rendered like this."
+  },
+  {
+    "objectID": "posts/blog_posts/Quarto_fonts.html",
+    "href": "posts/blog_posts/Quarto_fonts.html",
+    "title": "Changing fonts in Quarto",
+    "section": "",
+    "text": "I’ve found changing fonts in Quarto a little bit challenging, so here is a very quick tutorial that you may find useful!\nFirst we need to select our font. For my website I am using FairfaxHD by KreativeKorp (or at least I was when I wrote this blog post!).\nThe first thing we need to do is to convert our font to the woff and woff2 web font format. Most fonts will come in the .ttf truetype format, but the below code should work (or can at least be adapted) to work with almost any format.\nFor ease and general accessibility we use the python FontTools library. Running the little script below will then do the conversion when you run it from the same directory the fonts are saved in.\n\nfrom fontTools.ttLib import TTFont\nimport os\n\npwd = os.getcwd()\n\nf = TTFont(pwd + '/FairfaxHD.ttf')\n\nf.flavor='woff'\nf.save(pwd + '/FairfaxHD.woff')\n\nf.flavor='woff2'\nf.save(pwd + '/FairfaxHD.woff2')\n\nThe fonts then need to be moved somewhere in you quarto folder. Exactly where doesn’t matter (as long as its not _site), I keep mine in a base directory called /assets/.\nQuarto then needs pointing towards these fonts. This can be done by updating the .sscs file for any website customization we are doing.\nIf you don’t already have a .scss file you will need to create one and add it to your _quarto.yml like this.\n#| echo: true\n#| eval: false\n\nformat:\n  html:\n    theme: [cyborg, custom.scss]\nThe .scss file then needs to contain this code to point our Quarto website towards our new fonts. As I am only using one font across my whole website this is quite straight forward, but you can add in more variations here as you need.\n#| echo: true\n#| eval: false\n\n/*-- scss:defaults --*/\n\n$font-family-sans-serif: \"FairfaxHD\";\n$font-family-monospace: \"FairfaxHD\";\n$bs-body-font-family: \"FairfaxHD.woff\";\n$web-font-path: \"No\";\n\n/*-- scss:rules --*/\n\n@font-face {\n  font-display: swap;\n  font-family: \"FairfaxHD\";\n  font-style: normal;\n  font-weight: 400;\n  src: url(\"./assets/FairfaxHD.woff2\") format(\"woff2\"),\n      url(\"./assets/FairfaxHD.woff\") format(\"woff\");\n}"
+  },
+  {
+    "objectID": "posts/blog_posts/Emacs_font_spacing.html",
+    "href": "posts/blog_posts/Emacs_font_spacing.html",
+    "title": "Line spacing in Emacs by making a new font",
+    "section": "",
+    "text": "Emacs does not have a native way in which to increase the line spacing across all documents. As someone that works a lot on large text documents in Emacs I find that text is sometimes just too close together, and having a bit of line spacing makes it much easier to work with long pages of text.\nTo get around the lack of line-spacing support I have created a hacky way to create a new font which includes extra white space above and below the text itself to create the impression of line spacing.\nThis code is taken/derived from: https://github.com/tam5/font-patcher\nFontforge needs to be installed from the website. via brew\nthen you can run this fontforge file.py\n\nimport os\nimport fontforge\n\ninput_file = 'directory/your_font.ttf'\noutput_dir = 'directory/your_new_font.ttf'\n\nfactor = 1.2 # line spacing to add\n\ndef adjust(font, attribute, factor):\n    \"\"\"Adjust an attribute of a font by a given factor.\"\"\"\n    original = getattr(font, attribute)\n    new = int(getattr(font, attribute) * factor)\n\n    setattr(font, attribute, new)\n\n\nfont = fontforge.open(input_file)\n\nprint('')\nfor prop in ['os2_winascent', 'os2_typoascent', 'hhea_ascent']:\n    adjust(font, prop, factor)\n\nfor prop in ['os2_windescent', 'os2_typodescent', 'hhea_descent']:\n    adjust(font, prop, factor * 2)\n\nfor attr in ['fontname', 'familyname', 'fullname']:\n    value = \"{} {}\".format(getattr(font, attr), factor)\n    setattr(font, attr, value)\n\nfont.copyright = \"(c) {} Acme Corp. All Rights Reserved.\"\n\nfilename, extension = os.path.splitext(os.path.basename(input_file))\nnewFileName = \"{}Patched {}{}\".format(filename, factor, extension)\n\nsfnt = {}\nfor el in font.sfnt_names:\n    sfnt[el[1]] = el\n\nsfnt[\"UniqueID\"] = ('English (US)', 'UniqueID', font.fontname)\nsfnt[\"Preferred Family\"] = ('English (US)', 'Preferred Family', font.familyname)\n\nfont.sfnt_names = tuple(sfnt.values())\n\nfont.save(output_dir + \"/\" + newFileName)\nfont.generate(output_dir + \"/\" + newFileName)\n\nAnd this is the result:\n\nBefore\n\n\n\nAfter"
+  },
+  {
+    "objectID": "publications.html",
+    "href": "publications.html",
+    "title": "\nPublications\n",
+    "section": "",
+    "text": "Publications\n\n=====\nORCID: 0000-0003-2481-9785\n=====\n\nBooks\n=====\n\\\n“Doing Open Social Science: A Guide for Researchers, with Patrick Dunleavy, (2026), LSE Press\n\\\n“The Atlas of Finance” with , Dariusz Wójcik, Panagiotis Iliopoulos, Stefanos Ioannou, Liam Keenan, Julien Migozzi, Timothy Monteath, Vladimír Pažitka, Morag Torrance, Michael Urban, James Cheshire, Oliver Uberti, (2024), Yale University Press.\n\\\n\n\nArticles\n=====\n“Changing lanes? Exploring mergers and acquisitions in the global auto sector through GPN 2.0”, with Liam Keenan and Dariusz Wójcik, (2025), Global Networks, doi:10.1111/glob.70028\n“Hungry for power: financialization and the concentration of corporate control in the global food system” with Liam Keenan and Dariusz Wójcik, (2023), Geoforum, doi:10.1016/j.geoforum.2023.103909\n\\\n“Financial discipline through inter-sectoral mergers and acquisitions: Exploring the convergence of Global Production Networks and the Global Financial Network” with Liam Keenan and Dariusz Wójcik, (2022), Environment and Planning A: Economy and Space, doi:10.1177/0308518X221115739\n\\\n“Patents over patients? Exploring the variegated financialization of the pharmaceuticals industry through mergers and acquisitions””, with Liam Keenan and Dariusz Wójcik, (2022), Competition & Change, doi:10.1177/10245294221107851; OA Link (with color figures!)\n\\\n=====\n\n\nBook Chapters\n=====\n“Challenging the Dogma of the Self-made Man: The Sunday Times Rich List Reexamined” with Elizabeth Schimpfoessl, (2022), in: eds, Sam Burgum and Katie Higgins, “How the Other Half Lives: Inter-connecting socio-spatial inequalities”, Manchester University Press; pre-print\n\\\n“The Culture of Elite Philanthropy: Russia and the United Kingdom Compared” with Elizabeth Schimpfoessl (2019), in: eds, Peter Duncan and Elizabeth Schimpfoessl, “Socialism, Capitalism and Alternatives: Area Studies and Global Theories”, London: UCL Press, (2019); OA Link\n\\\n=====\n\n\nReports\n=====\n“Diversity and Cyber Security Expertise” with Matt Spencer and Carlos Cámara-Menoyo, (2025), Policy Report.\n\\\n“Beyond Demographics: Behavioural Segmentation and Spatial Analytics to Enhance Visitor Experience at The British Museum” with Naomi Muggleton and Taha Yasseri, (2018, edited post-print 2025), for the British Museum and Turing Institute\n=====\n\n\nOther\n” The global food system is owned by an ever smaller number of companies – it’s damaging our health, our communities and the planet” with Liam Keenan and Dariusz Wójcik, (2022), for The Conversation\n=====\n\n\nThesis\n=====\nThe information infrastructure of land registration in England: a sociology of real estate at the intersection of elites, markets and statistics (2021) PhD Thesis, The London School of Economics and Political Science (LSE)."
+  },
+  {
+    "objectID": "cc.html",
+    "href": "cc.html",
+    "title": "\nCC\n",
+    "section": "",
+    "text": "CC\n\n\\\n\\\n\\\nEverything on this website is written and published by Timothy Monteath and licensed under Creative Commons Attribution 4.0 International\n\\\n\\\n\\"
+  },
+  {
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "\nResources\n",
+    "section": "",
+    "text": "Resources\n\nThis is a collection of some bits an pieces I have made for teaching and workshops. I’ve left them all here in the hope that they might of use :)\n=====\nA very quick introduction to QGIS and OpenStreetMap for our Inclusive Cartographies Workshop\n\n\nNotes on working with EXIF data and images in R for IM946\n\n\nSome fun playing around with EXIF metadata and plotting images for IM946\n\n\nA very quick introduciton to layout and Inkscape for IM946"
+  }
+]
