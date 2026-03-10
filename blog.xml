@@ -20,9 +20,9 @@
 
 
 
-<p>I am a big fan of <span class="highlight-contrast">highlighting bits of text</span>. Particularly in presentations where I slides with long quotes on them.</p>
+<p>I am a big fan of <span class="highlight-contrast">highlighting bits of text</span>. Particularly in presentations where I have slides with long quotes on them.</p>
 <p>Unfortunately Quarto does not have a native function to be able to do this. However by playing around with the <code>custom.scss</code> file we can add this in ourselves.</p>
-<p>First we want to set the varibles for the colors we are using throughout our website/slides/book etc. This needs to go in the <code>/*-- scss:defaults --*/</code> section at the top of the <code>custom.scss</code> file. `</p>
+<p>First we want to set the variables for the colors we are using throughout our website/slides/book etc. This needs to go in the <code>/*-- scss:defaults --*/</code> section at the top of the <code>custom.scss</code> file. `</p>
 <pre><code>/*-- scss:defaults --*/
 $theme-background: #FEF2CA;
 $theme-text: #0C0C0C;</code></pre>
