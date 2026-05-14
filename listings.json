@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/blog_posts/HTML_animate_in_quarto.html",
       "/posts/blog_posts/Quarto_highlights.html",
       "/posts/blog_posts/Quarto_fonts.html",
       "/posts/blog_posts/Emacs_font_spacing.html"
@@ -10,6 +11,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/blog_posts/HTML_animate_in_quarto.html",
       "/posts/blog_posts/Quarto_highlights.html",
       "/posts/blog_posts/Quarto_fonts.html",
       "/posts/blog_posts/Emacs_font_spacing.html"

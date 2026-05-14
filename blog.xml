@@ -10,7 +10,105 @@
 <atom:link href="http://timothymonteath.space/blog.xml" rel="self" type="application/rss+xml"/>
 <description>This is Dr Timothy Monteath&#39;s personal website.</description>
 <generator>quarto-1.8.27</generator>
-<lastBuildDate>Fri, 06 Mar 2026 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 03 May 2026 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>HTML Animated Elements in Quarto</title>
+  <link>http://timothymonteath.space/posts/blog_posts/HTML_animate_in_quarto.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>To make my website a little more fun, and a bit more distinctive I have a couple of animated HTML elements. These elements are very easy to add in but are not very well documented anywhere.</p>
+<p><br>
+</p>
+<p>Adding in these elements allows us to do things like this:</p>
+<p><br>
+</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://press.lse.ac.uk/books/m/10.31389/lsepress.dos"><img src="http://timothymonteath.space/posts/blog_posts/assets/DoS.webp" class="animate__animated animate__pulse animate__infinite img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></a></p>
+</figure>
+</div>
+<p><br>
+</p>
+<p>To get this working there are a few things we need to line up. First, we need to install the <a href="https://github.com/mcanouil/quarto-animate">Quarto Animate plugin</a>, which is an implementation of the widely used <a href="https://animate.style/">Animate.css</a> library. This can be done by running this code from the terminal in the directory where your quarto site is located.</p>
+<p><br>
+</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">quarto add mcanouil<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>quarto<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>animate<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">@</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>.<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6.1</span></span></code></pre></div></div>
+</div>
+<p><br>
+</p>
+<p>If we want to animate text, as I do for the little terminal block <span class="animate__animated animate__flash animate__infinite" style="display: inline-block;">█</span> in the header for the website this is fairly straight forward. All we have to do is include the shortcode directly in our <code>.qmd</code> file and it will be rendered automatically. For example:</p>
+<p><br>
+</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">{{<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> animate flash <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'█'</span> animation<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>duration<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span>s <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">repeat</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span>infinite <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span>}}</span></code></pre></div></div>
+</div>
+<p><br>
+</p>
+<p>Here we are simply telling Quarto to use <code>animate</code> for this section; the <code>flash</code> animation which we have chosen; <span class="animate__animated animate__flash animate__infinite" style="display: inline-block;">our text (any unicode charecter or emoji 🪿 will work</span>; how long we want the <code>animation-duration</code> to last, which we can speed up or slow down by changing the <code>20s</code>; and how many times we want this to <code>repeat</code>. The <a href="https://animate.style/">Animate.css</a> guidelines warn against <code>infinite</code> repetitions as bad UX design, so use this carefully, particularly for the many entry and exit animations.</p>
+<p><br>
+</p>
+<p>However, if we want to apply these effects to an image or other element on our site this is a little more complex. As the above code uses the Animate plugin’s shortcode it won’t recognize images. Instead, we need to call directly to the underlying functions of Animate.css after our image has been rendered. For example this code which is used for the image above:</p>
+<p><br>
+</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span>[](assets<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>DoS.webp){.animate__animated .animate__pulse .animate__slow .animate__infinite width<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"50%"</span> fig<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>align<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"center"</span>}</span></code></pre></div></div>
+</div>
+<p><br>
+</p>
+<p>Here we are specifying that this image should be animated using (<code>.animate__animated</code>), which animation to use (<code>.animate__pulse</code>), its speed (<code>.animate__slow</code>), and how long this should last (<code>.animate__infinite</code>), then we have the rest of our Quarto options where we can set the size of the image.</p>
+
+
+
+ ]]></description>
+  <guid>http://timothymonteath.space/posts/blog_posts/HTML_animate_in_quarto.html</guid>
+  <pubDate>Sun, 03 May 2026 23:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Highlights in Quarto</title>
   <link>http://timothymonteath.space/posts/blog_posts/Quarto_highlights.html</link>
@@ -23,16 +121,76 @@
 <p>I am a big fan of <span class="highlight-contrast">highlighting bits of text</span>. Particularly in presentations where I have slides with long quotes on them.</p>
 <p>Unfortunately Quarto does not have a native function to be able to do this. However by playing around with the <code>custom.scss</code> file we can add this in ourselves.</p>
 <p>First we want to set the variables for the colors we are using throughout our website/slides/book etc. This needs to go in the <code>/*-- scss:defaults --*/</code> section at the top of the <code>custom.scss</code> file. `</p>
-<pre><code>/*-- scss:defaults --*/
-$theme-background: #FEF2CA;
-$theme-text: #0C0C0C;</code></pre>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">*</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">--</span> scss<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>defaults <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">--</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">*/</span></span>
+<span id="cb1-2"><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">$</span>theme<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>background<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#FEF2CA;</span></span>
+<span id="cb1-3"><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">$</span>theme<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>text<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#0C0C0C;</span></span></code></pre></div></div>
+</div>
 <p>Then in the <code>/*-- scss:rules --*/</code> section we set a custom class for highlights. What we are doing here is swapping around the the text and background color.</p>
-<pre><code>/*-- scss:rules --*/
-
-.highlight-contrast{
-  background-color: $theme-black;
-  color: $theme-text;
-}</code></pre>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">*</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">--</span> scss<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>rules <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">--</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">*/</span></span>
+<span id="cb2-2"></span>
+<span id="cb2-3">.highlight<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>contrast{</span>
+<span id="cb2-4">  background<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>color<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">$</span>theme<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>black;</span>
+<span id="cb2-5">  color<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">$</span>theme<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>text;</span>
+<span id="cb2-6">}</span></code></pre></div></div>
+</div>
 <p>And that’s it!</p>
 <p>All we have to do is call this around any text we want highlighted. Like this:</p>
 <pre><code>[Text to highlight]{.highlight-contrast}</code></pre>
