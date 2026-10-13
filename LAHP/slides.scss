@@ -1,0 +1,43 @@
+/*-- scss:defaults --*/
+$theme-background: #FEF2CA;
+$theme-black: #0C0C0C;
+$theme-white: #FDFCFC;
+$theme-full-teal: #51D7C1;
+$theme-full-yellow: #FEDE7B;
+$theme-full-purple: #A499F4;
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+
+$body-bg: $theme-background;
+$body-color: $theme-black;
+$link-color: $theme-full-purple;
+$presentation-heading-color: $theme-black;
+
+$font-family-sans-serif: 'Cormorant Garamond', serif;
+$presentation-heading-font: 'Cormorant Garamond', serif;
+
+/*-- scss:rules --*/
+
+.justify {
+  text-align: justify !important
+}
+
+.custom-small table {
+        font-size: .5em
+      }
+
+.text-purple{
+  color: $theme-full-purple;
+}
+
+.highlight-yellow{
+  background-color: $theme-full-yellow;
+  font-weight: 700;
+}
+
+.highlight-contrast{
+  background-color: $theme-black;
+  color: $theme-white;
+  font-weight: 700;
+}
