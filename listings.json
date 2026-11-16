@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/blog_posts/Layouts.html",
       "/posts/blog_posts/HTML_animate_in_quarto.html",
       "/posts/blog_posts/Quarto_highlights.html",
       "/posts/blog_posts/Quarto_fonts.html",
@@ -11,6 +12,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/blog_posts/Layouts.html",
       "/posts/blog_posts/HTML_animate_in_quarto.html",
       "/posts/blog_posts/Quarto_highlights.html",
       "/posts/blog_posts/Quarto_fonts.html",

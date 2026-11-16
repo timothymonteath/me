@@ -9,8 +9,387 @@
 <link>http://timothymonteath.space/blog.html</link>
 <atom:link href="http://timothymonteath.space/blog.xml" rel="self" type="application/rss+xml"/>
 <description>This is Dr Timothy Monteath&#39;s personal website.</description>
-<generator>quarto-1.8.27</generator>
-<lastBuildDate>Sun, 03 May 2026 23:00:00 GMT</lastBuildDate>
+<generator>quarto-1.10.19</generator>
+<lastBuildDate>Wed, 28 Oct 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Complex Page Layouts in Quarto</title>
+  <link>http://timothymonteath.space/posts/blog_posts/Layouts.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>By default Quarto has a clean page layout that is suitable for most kinds of posts we would want to make. But we can start to customise this to create columns and more interesting layouts using <code>::: {.column width=''}</code>. For example we can set this just half the width of our text with:<sup>1</sup></p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;I’ve justified the text here to make it look neater by adding <code>.justify {text-align: justify;}</code> to my <code>.scss</code> file.</p></div></div><pre><code>::: {.column width=50% .justify}
+*Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis.*
+:::</code></pre>
+<div class="column justify" style="width:50%;">
+<p><span class="highlight-contrast"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.</em></span></p>
+</div>
+<p>As we are using percentages this means that we need to make everything add up to 100%. By default, these percentages will align to the left. For example:</p>
+<pre><code>::: {.columns}
+
+::: {.column width=40% .justify}
+*Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.*
+:::
+
+::: {.column width=40% .justify}
+*Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.*
+:::
+
+:::</code></pre>
+<div class="columns">
+<div class="column justify" style="width:40%;">
+<p><span class="highlight-contrast"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.</em></span></p>
+</div><div class="column justify" style="width:40%;">
+<p><span class="highlight-contrast"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.</em></span></p>
+</div>
+</div>
+<p>Will put both columns next to each other. If we want a break between the two, we need to explicitly include a gutter between the two columns.</p>
+<pre><code>::: {.columns}
+
+::: {.column width=45% .justify}
+*Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.*
+:::
+
+::: {.column width=10% .justify}
+
+:::
+
+::: {.column width=45% .justify}
+*Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.*
+:::
+
+:::</code></pre>
+<div class="columns">
+<div class="column justify" style="width:45%;">
+<p><span class="highlight-contrast"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.</em></span></p>
+</div><div class="column" style="width:9%;">
+
+</div><div class="column justify" style="width:45%;">
+<p><span class="highlight-contrast"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.</em></span></p>
+</div>
+</div>
+<p>For example we can then use this form of a column layout to flow text around images or quotes.</p>
+<pre><code>::: {.justify}
+
+::: {.columns}
+
+::: {.column width=50%}
+[*Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.*]{.highlight-contrast}
+:::
+
+::: {.column width=5%}
+
+:::
+
+::: {.column width=45%}
+![](/assets/Siddhi.jpg)
+:::
+
+:::
+
+:::
+</code></pre>
+<div class="justify">
+<p><span class="highlight-contrast justify"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.</em></span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="highlight-contrast"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cuersus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis. Proin accumsan massa id laoreet cursus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquam nulla erat, ut sodales tortor euismod sit amet. In at felis imperdiet, dignissim nibh a, varius nibh. </em></span></p>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:45%;">
+<p><img src="http://timothymonteath.space/posts/blog_posts/assets/Siddhi.jpg" class="img-fluid"></p>
+</div>
+</div>
+<p><span class="highlight-contrast justify"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.</em></span></p>
+</div>
+<section id="breaking-out" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="breaking-out">Breaking out!</h2>
+<p>By default, all our text spans the centre of each page in a single column. Under the hood, this is driven by the <code>{.column-body}</code> and unless we want to change the size of this parameter for our website overall, we can leave this as it is, but there are additional variables that we can use to break outside of this layout.<sup>2</sup></p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;Some of which I will run through here, but which are documented in depth in the Quarto documentation: <a href="https://quarto.org/docs/authoring/article-layout.html">https://quarto.org/docs/authoring/article-layout.hml</a></p></div></div><pre><code>::: {.column-body-outset}
+
+:::</code></pre>
+<div class="column-body-outset">
+<p><span class="highlight-contrast justify"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.</em></span></p>
+</div>
+<p>Or further still;</p>
+<pre><code>::: {.column-page}
+
+:::</code></pre>
+<div class="column-page">
+<p><span class="highlight-contrast justify"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.</em></span></p>
+</div>
+<p>All the way up to the width of the page, either with a small inset, or from edge to edge;</p>
+<pre><code>::: {.column-screen-inset}
+
+:::</code></pre>
+<div class="column-screen-inset">
+<p><span class="highlight-contrast justify"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.</em></span></p>
+</div>
+<pre><code>::: {.column-screen}
+
+:::</code></pre>
+<div class="column-screen">
+<p><span class="highlight-contrast justify"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.</em></span></p>
+</div>
+<p>There is also the option to off-set this to only one side by specifying either the <code>left</code> or <code>right</code>, for example;</p>
+<pre><code>::: {.column-body-outset-right}
+:::
+::: {.column-page-inset-right}
+:::
+::: {.column-page-right}
+:::
+::: {.column-screen-inset-right}
+:::
+::: {.column-screen-right}
+:::</code></pre>
+<div class="column-body-outset-right">
+<p><span class="highlight-contrast justify"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.</em></span></p>
+</div>
+<div class="column-page-inset-right">
+<p><span class="highlight-contrast justify"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.</em></span></p>
+</div>
+<div class="column-page-right">
+<p><span class="highlight-contrast justify"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.</em></span></p>
+</div>
+<div class="column-screen-inset-right">
+<p><span class="highlight-contrast justify"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.</em></span></p>
+</div>
+<div class="column-screen-right">
+<p><span class="highlight-contrast justify"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.</em></span></p>
+</div>
+<p>We can then put this together to start making more interesting page layouts. For example, a common way to break up text is to place key quotes offset in a larger font<sup>3</sup>;</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;<code>.huge-text</code> made with <code>.huge-text {font-size: 6em;}</code> in the <code>.scss</code></p></div></div><pre><code>:::{.justify}
+[*Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.*]{.highlight-contrast .justify}
+
+::: {.column-page-right}
+
+::: {.columns}
+
+::: {.column width=40%}
+[*Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cuersus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis. Proin accumsan massa id laoreet cursus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquam nulla erat, ut sodales tortor euismod sit amet. In at felis imperdiet, dignissim nibh a, varius nibh. *]{.highlight-contrast}
+:::
+
+::: {.column width=5%}
+:::
+
+::: {.column width=55%}
+["Lorem ipsum"]{.pilowlava .huge-text}
+:::
+
+:::
+
+:::
+[*Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.*]{.highlight-contrast .justify}
+:::
+</code></pre>
+<div class="justify page-columns page-full">
+<p><span class="highlight-contrast justify"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.</em></span></p>
+<div class="column-page-right">
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><span class="highlight-contrast"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cuersus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis. Proin accumsan massa id laoreet cursus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquam nulla erat, ut sodales tortor euismod sit amet. In at felis imperdiet, dignissim nibh a, varius nibh. </em></span></p>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:55%;">
+<p><span class="pilowlava huge-text">“Lorem ipsum”</span></p>
+</div>
+</div>
+</div>
+<p><span class="highlight-contrast justify"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.</em></span></p>
+</div>
+</section>
+<section id="bringing-it-all-together" class="level1 page-columns page-full">
+<h1>Bringing it all together</h1>
+<p>With these tools in place, we can essentially create a <a href="https://timothymonteath.space/layout/">grid layout</a> for a page, and build content in this way;</p>
+<pre><code>::: {.column-screen-inset}
+
+::: {.columns}
+
+::: {.column width=10%}
+:::
+::: {.column width=40%}
+[Lorem ipsum dolor]{.pilowlava .big-text}
+:::
+::: {.column width=50%}
+:::
+
+:::
+
+:::
+::: {.column-screen-inset}
+
+::: {.columns}
+
+::: {.column width=30%}
+:::
+::: {.column width=40%}
+[sit amet, consectetur]{.pilowlava .big-text}
+:::
+::: {.column width=30%}
+:::
+
+:::
+
+:::
+
+::: {.columns}
+
+::: {.column width=50%}
+:::
+::: {.column width=50%}
+[adipiscing elit.]{.pilowlava .big-text}
+:::
+
+:::
+
+::: {.justify}
+
+[*Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis. Proin accumsan massa id laoreet cursus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquam nulla erat, ut sodales tortor euismod sit amet. In at felis imperdiet, dignissim nibh a, varius nibh. *]{.highlight-contrast}
+
+
+::: {.column-page}
+
+::: {.columns}
+
+::: {.column width=60%}
+[*Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.*]{.highlight-contrast}
+:::
+::: {.column width=40%}
+:::
+
+::: {.columns}
+
+::: {.column width=30%}
+:::
+::: {.column width=60%}
+[*Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.*]{.highlight-contrast}
+:::
+
+:::
+:::
+
+:::
+
+[*Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis. Proin accumsan massa id laoreet cursus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquam nulla erat, ut sodales tortor euismod sit amet. In at felis imperdiet, dignissim nibh a, varius nibh. *]{.highlight-contrast}
+
+:::</code></pre>
+<div class="column-screen-inset">
+<div class="columns">
+<div class="column" style="width:10%;">
+
+</div><div class="column" style="width:40%;">
+<p><span class="pilowlava big-text">Lorem ipsum dolor</span></p>
+</div><div class="column" style="width:50%;">
+
+</div>
+</div>
+</div>
+<div class="column-screen-inset">
+<div class="columns">
+<div class="column" style="width:30%;">
+
+</div><div class="column" style="width:40%;">
+<p><span class="pilowlava big-text">sit amet, consectetur</span></p>
+</div><div class="column" style="width:30%;">
+
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+
+</div><div class="column" style="width:50%;">
+<p><span class="pilowlava big-text">adipiscing elit.</span></p>
+</div>
+</div>
+<div class="justify page-columns page-full">
+<p><span class="highlight-contrast"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis. Proin accumsan massa id laoreet cursus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquam nulla erat, ut sodales tortor euismod sit amet. In at felis imperdiet, dignissim nibh a, varius nibh. </em></span></p>
+<div class="column-page">
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><span class="highlight-contrast"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.</em></span></p>
+</div><div class="column" style="width:40%;">
+
+</div><div class="columns">
+<div class="column" style="width:30%;">
+
+</div><div class="column" style="width:60%;">
+<p><span class="highlight-contrast"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis.</em></span></p>
+</div>
+</div>
+</div>
+</div>
+<p><span class="highlight-contrast"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis. Proin accumsan massa id laoreet cursus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquam nulla erat, ut sodales tortor euismod sit amet. In at felis imperdiet, dignissim nibh a, varius nibh. </em></span></p>
+</div>
+<section id="vertical-text" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="vertical-text">Vertical text</h2>
+<p>To get even funkier, we can bring in some other CSS elements to add vertical text to our page, and then put this into one of our columns.</p>
+<p>First we need to add a new class to our <code>.scss</code> for example;</p>
+<pre><code>.vertical_1 {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}</code></pre>
+<p>And then putting this into a column layout;</p>
+<pre><code>::: {.column-page-left}
+
+::: {.columns}
+
+::: {.column width=20%}
+[Lorem]{.pilowlava .huge-text .vertical_1}
+:::
+::: {.column width=2%}
+:::
+::: {.column width=78%}
+[*Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis. Proin accumsan massa id laoreet cursus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquam nulla erat, ut sodales tortor euismod sit amet. In at felis imperdiet, dignissim nibh a, varius nibh. *]{.highlight-contrast}
+
+[*Integer molestie non ante quis varius. Morbi vel erat dolor. Mauris sit amet magna pulvinar, gravida quam ac, suscipit libero. Nam sit amet lorem nec sapien rhoncus sollicitudin quis sit amet arcu. Donec commodo varius libero sed bibendum. Pellentesque ullamcorper lacus eu elementum facilisis. Cras imperdiet consequat elit ut blandit. Quisque a sagittis lacus. Quisque metus urna, porta in neque in, gravida semper lectus. Nam commodo molestie posuere.*]{.highlight-contrast}
+:::
+
+:::
+
+:::</code></pre>
+<div class="column-page-left">
+<div class="columns">
+<div class="column" style="width:20%;">
+<p><span class="pilowlava huge-text vertical_1">Lorem</span></p>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:78%;">
+<p><span class="highlight-contrast"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis. Proin accumsan massa id laoreet cursus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquam nulla erat, ut sodales tortor euismod sit amet. In at felis imperdiet, dignissim nibh a, varius nibh. </em></span></p>
+<p><span class="highlight-contrast"><em>Integer molestie non ante quis varius. Morbi vel erat dolor. Mauris sit amet magna pulvinar, gravida quam ac, suscipit libero. Nam sit amet lorem nec sapien rhoncus sollicitudin quis sit amet arcu. Donec commodo varius libero sed bibendum. Pellentesque ullamcorper lacus eu elementum facilisis. Cras imperdiet consequat elit ut blandit. Quisque a sagittis lacus. Quisque metus urna, porta in neque in, gravida semper lectus. Nam commodo molestie posuere.</em></span></p>
+</div>
+</div>
+</div>
+<p>Or we can orient our text vertically the other way;</p>
+<pre><code>.vertical_2 {
+  writing-mode: vertical-rl;
+  text-orientation: sideways;
+}</code></pre>
+<div class="column-page-right">
+<div class="columns">
+<div class="column" style="width:78%;">
+<p><span class="highlight-contrast"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan vestibulum magna non consectetur. Morbi facilisis efficitur commodo. Etiam vitae finibus est, sit amet iaculis nisi. Aenean facilisis cursus nunc eget gravida. Proin id nunc felis. Vivamus nec tincidunt arcu, sed porta felis. Proin accumsan massa id laoreet cursus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquam nulla erat, ut sodales tortor euismod sit amet. In at felis imperdiet, dignissim nibh a, varius nibh. </em></span></p>
+<p><span class="highlight-contrast"><em>Integer molestie non ante quis varius. Morbi vel erat dolor. Mauris sit amet magna pulvinar, gravida quam ac, suscipit libero. Nam sit amet lorem nec sapien rhoncus sollicitudin quis sit amet arcu. Donec commodo varius libero sed bibendum. Pellentesque ullamcorper lacus eu elementum facilisis. Cras imperdiet consequat elit ut blandit. Quisque a sagittis lacus. Quisque metus urna, porta in neque in, gravida semper lectus. Nam commodo molestie posuere.</em></span></p>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:20%;">
+<p><span class="pilowlava huge-text vertical_2">Lorem</span></p>
+</div>
+</div>
+</div>
+
+
+</section>
+</section>
+
+
+ ]]></description>
+  <guid>http://timothymonteath.space/posts/blog_posts/Layouts.html</guid>
+  <pubDate>Wed, 28 Oct 2026 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>HTML Animated Elements in Quarto</title>
   <link>http://timothymonteath.space/posts/blog_posts/HTML_animate_in_quarto.html</link>
@@ -59,7 +438,7 @@ font-style: inherit;">6.1</span></span></code></pre></div></div>
 background-color: null;
 font-style: inherit;">&lt;</span> animate flash <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">'█'</span> animation<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">'cf5733e5-0370-4aae-8689-61bad1dd9ec0&amp;#x2588;'</span> animation<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">-</span>duration<span class="sc" style="color: #5E5E5E;
 background-color: null;
